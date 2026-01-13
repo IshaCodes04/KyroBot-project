@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { ChevronRight } from 'lucide-react'
 import './Home.css'
 
 export default function Home() {
@@ -54,7 +55,9 @@ export default function Home() {
               simplified for everyone.
             </p>
             <div className="hero-buttons">
-              <Link to="/signup" className="btn btn-primary">Start Chatting Free</Link>
+              <Link to="/signup" className="btn btn-primary">
+                Start Chatting Free <ChevronRight size={20} style={{ marginLeft: '8px' }} />
+              </Link>
               <Link to="/about" className="btn btn-secondary">Learn How it Works</Link>
             </div>
           </div>

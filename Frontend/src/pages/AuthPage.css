@@ -1,5 +1,5 @@
 .auth-page {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   background-color: var(--bg-dark);
   color: var(--text-primary);
@@ -29,12 +29,13 @@
 }
 
 .auth-left {
-  padding: 60px;
+  padding: 40px 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: rgba(2, 6, 23, 0.4);
   backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
 .back-link {
@@ -43,7 +44,7 @@
   gap: 10px;
   color: var(--text-secondary);
   font-weight: 500;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   transition: all 0.3s ease;
   text-decoration: none;
 }
@@ -60,30 +61,30 @@
 }
 
 .auth-title {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 800;
-  margin-bottom: 12px;
-  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
   color: white;
 }
 
 .auth-subtitle {
   color: var(--text-secondary);
-  margin-bottom: 40px;
-  font-size: 16px;
+  margin-bottom: 24px;
+  font-size: 15px;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .form-group label {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   color: #cbd5e1;
 }
 
@@ -102,7 +103,7 @@
 
 .auth-page .input-icon {
   position: absolute;
-  left: 18px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--primary);
@@ -113,12 +114,12 @@
 
 .form-group input {
   width: 100%;
-  padding: 16px 44px 16px 56px;
+  padding: 12px 40px 12px 48px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
+  border-radius: 12px;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   transition: all 0.3s ease;
 }
 
@@ -146,14 +147,14 @@
 }
 
 .btn-submit {
-  padding: 16px;
+  padding: 14px;
   background: var(--aurora-gradient);
   color: white;
-  border-radius: 14px;
-  font-size: 17px;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 700;
   transition: all 0.3s ease;
-  margin-top: 10px;
+  margin-top: 5px;
   box-shadow: 0 10px 20px -10px var(--primary-glow);
   border: none;
   cursor: pointer;
@@ -166,9 +167,10 @@
 }
 
 .auth-footer {
-  margin-top: 32px;
+  margin-top: 24px;
   text-align: center;
   color: var(--text-secondary);
+  font-size: 14px;
 }
 
 .auth-switch-btn {
@@ -213,11 +215,11 @@
 }
 
 .echo-title {
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 400;
   line-height: 1.1;
   color: white;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .echo-title span {
@@ -227,14 +229,14 @@
 
 .echo-visual-section {
   position: relative;
-  margin: 60px 0;
+  margin: 30px 0;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .echo-robot {
-  width: 380px;
+  width: 320px;
   height: auto;
   filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
   animation: float 6s ease-in-out infinite;
@@ -245,8 +247,8 @@
 
 .robot-glow {
   position: absolute;
-  width: 450px;
-  height: 450px;
+  width: 350px;
+  height: 350px;
   background: radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, rgba(139, 92, 246, 0.1) 50%, transparent 70%);
   border-radius: 50%;
   top: 50%;
@@ -332,7 +334,7 @@
 
 .echo-bottom-bar {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }

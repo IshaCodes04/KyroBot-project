@@ -67,103 +67,100 @@ export default function AuthPage({ type = 'login' }) {
             <ArrowLeft size={20} /> Back to explore
           </Link>
 
+          <h1 className="auth-title">
+            {authType === 'login' ? 'Great to see you again' : 'Join the revolution'}
+          </h1>
+          <p className="auth-subtitle">
+            {authType === 'login'
+              ? 'Empower your daily tasks with intelligent conversations.'
+              : 'Experience the next generation of AI-driven productivity.'}
+          </p>
 
-          <div className="auth-content">
-            <h1 className="auth-title">
-              {authType === 'login' ? 'Great to see you again' : 'Join the revolution'}
-            </h1>
-            <p className="auth-subtitle">
-              {authType === 'login'
-                ? 'Empower your daily tasks with intelligent conversations.'
-                : 'Experience the next generation of AI-driven productivity.'}
-            </p>
+          {error && <div className="auth-error-message">{error}</div>}
 
-            {error && <div className="auth-error-message">{error}</div>}
-
-            <form onSubmit={handleSubmit} className="auth-form">
-              {authType === 'signup' && (
-                <div className="form-group">
-                  <label htmlFor="fullName">Full Name</label>
-                  <div className="input-wrapper">
-                    <User className="input-icon" size={20} />
-                    <input
-                      id="fullName"
-                      type="text"
-                      name="fullName"
-                      placeholder="e.g. Isha Singh"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      required={authType === 'signup'}
-                    />
-                  </div>
-                </div>
-              )}
-
+          <form onSubmit={handleSubmit} className="auth-form">
+            {authType === 'signup' && (
               <div className="form-group">
-                <label htmlFor="email">Email Address</label>
+                <label htmlFor="fullName">Full Name</label>
                 <div className="input-wrapper">
-                  <Mail className="input-icon" size={20} />
+                  <User className="input-icon" size={20} />
                   <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="name@example.com"
-                    value={formData.email}
+                    id="fullName"
+                    type="text"
+                    name="fullName"
+                    placeholder="e.g. Isha Singh"
+                    value={formData.fullName}
                     onChange={handleInputChange}
-                    required
+                    required={authType === 'signup'}
                   />
                 </div>
               </div>
+            )}
 
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <div className="input-wrapper">
-                  <Lock className="input-icon" size={20} />
-                  <input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
-                    placeholder="••••••••"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                  />
-                  <button
-                    type="button"
-                    className="toggle-password"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
-                </div>
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <div className="input-wrapper">
+                <Mail className="input-icon" size={20} />
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="name@example.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
-
-              <button
-                type="submit"
-                className="btn-submit"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Processing...' : (authType === 'login' ? 'Sign In' : 'Create Account')}
-              </button>
-            </form>
-
-            <div className="auth-footer">
-              {authType === 'login' ? (
-                <>
-                  New to AI-ChatBot?{' '}
-                  <button className="auth-switch-btn" onClick={() => setAuthType('signup')}>
-                    Start for free
-                  </button>
-                </>
-              ) : (
-                <>
-                  Already have an account?{' '}
-                  <button className="auth-switch-btn" onClick={() => setAuthType('login')}>
-                    Sign in here
-                  </button>
-                </>
-              )}
             </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="input-wrapper">
+                <Lock className="input-icon" size={20} />
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-password"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="btn-submit"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Processing...' : (authType === 'login' ? 'Sign In' : 'Create Account')}
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            {authType === 'login' ? (
+              <>
+                New to AI-ChatBot?{' '}
+                <button className="auth-switch-btn" onClick={() => setAuthType('signup')}>
+                  Start for free
+                </button>
+              </>
+            ) : (
+              <>
+                Already have an account?{' '}
+                <button className="auth-switch-btn" onClick={() => setAuthType('login')}>
+                  Sign in here
+                </button>
+              </>
+            )}
           </div>
         </div>
 
