@@ -12,7 +12,8 @@ import {
   Bot,
   MessageSquare,
   Zap,
-  Shield
+  Shield,
+  ChevronRight
 } from 'lucide-react'
 
 export default function AuthPage({ type = 'login' }) {
@@ -167,49 +168,40 @@ export default function AuthPage({ type = 'login' }) {
         </div>
 
         <div className="auth-right">
-          <div className="bot-panel">
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '20px',
-              marginBottom: '32px'
-            }}>
-              <MessageSquare size={32} color="#6366f1" />
-              <Zap size={32} color="#a855f7" />
-              <Shield size={32} color="#ec4899" />
-            </div>
-            <h2 className="bot-title">More than just a Chat</h2>
-            <p className="bot-subtitle">
-              Our AI is designed to understand context, solve problems, and grow with you.
-              Join a community of forward-thinkers.
-            </p>
+          <div className="echo-container">
+            <h2 className="echo-title">
+              Meet the <br /> <span>Echo Mind!</span>
+            </h2>
 
-            <div className="bot-visual" style={{ background: 'none' }}>
-              {/* Decorative elements instead of missing image */}
-              <div style={{
-                width: '200px',
-                height: '200px',
-                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(168, 85, 247, 0.4))',
-                borderRadius: '50%',
-                margin: '0 auto',
-                filter: 'blur(40px)',
-                position: 'absolute',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                zIndex: -1
-              }}></div>
-              <Bot size={120} style={{ animation: 'float 4s ease-in-out infinite' }} />
+            <div className="echo-visual-section">
+              <div className="thought-bubble">
+                Need our help now?
+              </div>
+              <div className="thought-dots">
+                <div className="dot-1"></div>
+                <div className="dot-2"></div>
+                <div className="dot-3"></div>
+              </div>
+              <div className="robot-glow"></div>
+              <img
+                src="/assets/images/robot.png"
+                alt="Echo Mind Robot"
+                className="echo-robot"
+              />
             </div>
 
-            <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center', gap: '8px' }}>
-              {[1, 2, 3].map(i => (
-                <div key={i} style={{
-                  width: i === 2 ? '24px' : '8px',
-                  height: '8px',
-                  borderRadius: '4px',
-                  background: i === 2 ? '#6366f1' : 'rgba(255,255,255,0.1)'
-                }}></div>
-              ))}
+            <div className="echo-bottom-bar">
+              <div className="echo-start-btn">
+                <div className="chevron-circle">
+                  <ChevronRight size={24} />
+                </div>
+                <span className="btn-text">Get Started</span>
+                <div className="arrows">
+                  <ChevronRight size={14} />
+                  <ChevronRight size={14} />
+                  <ChevronRight size={14} />
+                </div>
+              </div>
             </div>
           </div>
         </div>

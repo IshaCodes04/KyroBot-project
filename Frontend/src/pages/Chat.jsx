@@ -17,7 +17,8 @@ import {
     Menu,
     Sun,
     Moon,
-    Mic
+    Mic,
+    LogOut
 } from 'lucide-react';
 
 function Chat() {
@@ -365,8 +366,8 @@ function Chat() {
                 </div>
 
                 <div className="sidebar-footer">
-                    <button className="sidebar-btn" onClick={handleLogout}>
-                        <X size={20} />
+                    <button className="sidebar-btn logout-btn" onClick={handleLogout}>
+                        <LogOut size={18} />
                         Logout
                     </button>
                     <div className="user-info">
