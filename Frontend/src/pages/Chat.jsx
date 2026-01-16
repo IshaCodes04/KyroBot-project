@@ -48,7 +48,7 @@ function Chat() {
         if (!token) {
             navigate('/login');
             return;
-        } // redirect to login 
+        } // redirect to login page
 
         if (!socketRef.current) {
             socketRef.current = io('http://localhost:3000', {
