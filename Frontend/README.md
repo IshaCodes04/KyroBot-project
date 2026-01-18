@@ -11,7 +11,7 @@
 
 - passport , jwt , passport-google-oauth2.0
 
-* Initialize passport
+* Initialize passport.js
 
 - use passport in app.js 
 - configure passport to use google auth
