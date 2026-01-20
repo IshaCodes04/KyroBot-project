@@ -85,3 +85,22 @@ exports.getMe = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+// @desc    Google Auth Callback
+// @route   GET /api/auth/google/callback
+// @access  Public
+exports.googleCallback = (req, res) => {
+    // Generate token
+    const token = generateToken(req.user._id);
+
+    // Prepare user data
+    const userData = {
+        _id: req.user._id,
+        fullName: req.user.fullName,
+        email: req.user.email
+    };
+
+    // Redirect to frontend with token and user data
+    // Use environment variable for frontend URL or fallback to localhost
+    const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5173';
+    res.redirect(`${frontendURL}?token=${token}&user=${encodeURIComponent(JSON.stringify(userData))}`);
+};
