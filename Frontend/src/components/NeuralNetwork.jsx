@@ -34,7 +34,8 @@ const NeuralNetwork = () => {
             }
 
             draw() {
-                ctx.fillStyle = '#0891b2';
+                // Green nodes (premium, readable on warm canvas)
+                ctx.fillStyle = '#16a34a'; // green-600
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -63,7 +64,8 @@ const NeuralNetwork = () => {
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < connectionDistance) {
-                        ctx.strokeStyle = `rgba(6, 182, 212, ${0.2 * (1 - distance / connectionDistance)})`;
+                        // Green connections with distance-based alpha
+                        ctx.strokeStyle = `rgba(22, 163, 74, ${0.2 * (1 - distance / connectionDistance)})`; // green-600
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);

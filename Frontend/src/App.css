@@ -17,14 +17,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
-  /* slate-300 */
+  background-color: #E6DED6; /* zd.border */
   border-radius: 9999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #94a3b8;
-  /* slate-400 */
+  background-color: #6E6661; /* zd.muted */
 }
 
 /* Animations */

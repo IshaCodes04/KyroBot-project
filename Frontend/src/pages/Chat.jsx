@@ -279,33 +279,33 @@ function Chat() {
     };
 
     return (
-        <div className="flex h-screen bg-slate-50 overflow-hidden font-sans text-slate-900">
+        <div className="flex h-screen bg-zd-canvas overflow-hidden font-sans text-zd-ink">
             {/* Mobile Overlay */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-slate-900/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
+                    className="fixed inset-0 bg-zd-ink/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
                     onClick={() => setIsSidebarOpen(false)}
                 ></div>
             )}
 
             {/* Sidebar */}
-            <div className={`fixed lg:relative z-50 w-80 h-full bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+            <div className={`fixed lg:relative z-50 w-80 h-full bg-zd-surface border-r border-zd-border transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
                 {/* Sidebar Header */}
-                <div className="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-white/50 backdrop-blur-md">
+                <div className="h-16 flex items-center justify-between px-6 border-b border-zd-border bg-zd-surface/60 backdrop-blur-md">
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/30">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-zd-brand to-zd-brand2 flex items-center justify-center text-white shadow-lg shadow-[rgba(125,89,255,0.25)]">
                             <MessageCircle size={18} />
                         </div>
                         <div>
-                            <h1 className="font-bold text-lg tracking-tight text-slate-900">AI ChatBot</h1>
+                            <h1 className="font-bold text-lg tracking-tight text-zd-ink">AI ChatBot</h1>
                             <div className="flex items-center gap-1.5">
-                                <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-slate-300'}`}></span>
-                                <span className="text-xs font-medium text-slate-500">{isConnected ? 'Online' : 'Offline'}</span>
+                                <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-zd-border'}`}></span>
+                                <span className="text-xs font-medium text-zd-muted">{isConnected ? 'Online' : 'Offline'}</span>
                             </div>
                         </div>
                     </div>
                     <button
-                        className="lg:hidden p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
+                        className="lg:hidden p-2 text-zd-muted/70 hover:text-zd-ink rounded-lg hover:bg-zd-surface2 transition-colors"
                         onClick={() => setIsSidebarOpen(false)}
                     >
                         <X size={20} />
@@ -316,7 +316,7 @@ function Chat() {
                 <div className="p-4">
                     <button
                         onClick={handleNewChat}
-                        className="w-full py-3.5 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-95"
+                        className="w-full py-3.5 px-4 bg-gradient-to-r from-zd-brand to-zd-brand2 hover:from-zd-brand2 hover:to-zd-brand2 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.20)] transition-all hover:scale-[1.02] active:scale-95"
                     >
                         <Plus size={20} />
                         <span>New Conversation</span>
@@ -326,18 +326,18 @@ function Chat() {
                 {/* Search */}
                 <div className="px-4 mb-2">
                     <div className="relative group">
-                        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-cyan-600 transition-colors" />
+                        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-zd-muted/70 group-focus-within:text-zd-brand transition-colors" />
                         <input
                             type="text"
                             placeholder="Search chats..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full py-2.5 pl-10 pr-8 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all"
+                            className="w-full py-2.5 pl-10 pr-8 bg-zd-surface2 border border-zd-border rounded-lg text-sm text-zd-ink focus:outline-none focus:ring-2 focus:ring-zd-brand/20 focus:border-zd-brand transition-all"
                         />
                         {searchQuery && (
                             <button
                                 onClick={() => setSearchQuery('')}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-zd-muted/70 hover:text-zd-ink"
                             >
                                 <X size={14} />
                             </button>
@@ -347,36 +347,36 @@ function Chat() {
 
                 {/* Conversations List */}
                 <div className="flex-1 overflow-y-auto py-2 px-3 space-y-1 custom-scrollbar">
-                    <h3 className="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 mt-4">History</h3>
+                    <h3 className="px-3 text-xs font-bold text-zd-muted/70 uppercase tracking-wider mb-3 mt-4">History</h3>
                     {filteredConversations.length > 0 ? (
                         filteredConversations.map(conv => (
                             <div
                                 key={conv.id}
                                 onClick={() => handleConversationClick(conv.id)}
                                 className={`group relative p-3 rounded-xl cursor-pointer transition-all ${currentConversationId === conv.id
-                                    ? 'bg-cyan-50 text-cyan-900 border border-cyan-100 shadow-sm'
-                                    : 'hover:bg-slate-50 text-slate-600 hover:text-slate-900 border border-transparent'
+                                    ? 'bg-zd-brandSoft text-zd-ink border border-zd-border shadow-sm'
+                                    : 'hover:bg-zd-surface2 text-zd-muted hover:text-zd-ink border border-transparent'
                                     }`}
                             >
                                 <div className="flex items-start gap-3">
-                                    <MessageCircle size={18} className={`mt-1 shrink-0 ${currentConversationId === conv.id ? 'text-cyan-600' : 'text-slate-400'}`} />
+                                    <MessageCircle size={18} className={`mt-1 shrink-0 ${currentConversationId === conv.id ? 'text-zd-brand' : 'text-zd-muted/70'}`} />
                                     <div className="flex-1 min-w-0 pr-6">
                                         <h4 className="font-medium truncate text-sm">{conv.title}</h4>
-                                        <p className={`text-xs truncate mt-0.5 ${currentConversationId === conv.id ? 'text-cyan-600/70' : 'text-slate-400'}`}>
+                                        <p className={`text-xs truncate mt-0.5 ${currentConversationId === conv.id ? 'text-zd-muted' : 'text-zd-muted/70'}`}>
                                             {conv.lastMessage}
                                         </p>
                                     </div>
                                 </div>
                                 <button
                                     onClick={(e) => handleDeleteConversation(conv.id, e)}
-                                    className="absolute right-2 top-3 p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
+                                    className="absolute right-2 top-3 p-1.5 text-zd-muted/70 hover:text-red-600 hover:bg-red-50 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
                                 >
                                     <Trash2 size={14} />
                                 </button>
                             </div>
                         ))
                     ) : (
-                        <div className="flex flex-col items-center justify-center h-40 text-slate-400 text-sm">
+                        <div className="flex flex-col items-center justify-center h-40 text-zd-muted/70 text-sm">
                             <MessageCircle size={32} className="mb-2 opacity-20" />
                             <p>{searchQuery ? 'No chats found' : 'No history yet'}</p>
                         </div>
@@ -384,16 +384,16 @@ function Chat() {
                 </div>
 
                 {/* User Profile */}
-                <div className="p-4 border-t border-slate-200 bg-slate-50/50">
-                    <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-white transition-colors border border-transparent hover:border-slate-200 hover:shadow-sm group">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+                <div className="p-4 border-t border-zd-border bg-zd-surface2/60">
+                    <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-zd-surface transition-colors border border-transparent hover:border-zd-border hover:shadow-sm group">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-zd-brand to-zd-brand2 flex items-center justify-center text-white font-bold text-sm shadow-md">
                             {user?.fullName?.[0]?.toUpperCase() || 'U'}
                         </div>
                         <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm text-slate-900 truncate">{user?.fullName || 'User'}</div>
-                            <div className="text-xs text-slate-500 truncate">{user?.email || 'user@example.com'}</div>
+                            <div className="font-medium text-sm text-zd-ink truncate">{user?.fullName || 'User'}</div>
+                            <div className="text-xs text-zd-muted truncate">{user?.email || 'user@example.com'}</div>
                         </div>
-                        <button onClick={handleLogout} className="p-2 text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+                        <button onClick={handleLogout} className="p-2 text-zd-muted/70 hover:text-red-600 transition-colors" title="Logout">
                             <LogOut size={18} />
                         </button>
                     </div>
@@ -401,30 +401,30 @@ function Chat() {
             </div>
 
             {/* Main Chat Area */}
-            <div className="flex-1 flex flex-col h-full relative bg-gradient-to-br from-slate-50 to-blue-50/50">
+            <div className="flex-1 flex flex-col h-full relative bg-gradient-to-br from-zd-canvas to-zd-surface2">
                 {/* Chat Header */}
-                <div className="h-16 bg-white/70 backdrop-blur-xl border-b border-slate-200/60 flex items-center justify-between px-4 lg:px-8 absolute top-0 left-0 right-0 z-30">
+                <div className="h-16 bg-zd-surface/70 backdrop-blur-xl border-b border-zd-border/70 flex items-center justify-between px-4 lg:px-8 absolute top-0 left-0 right-0 z-30">
                     <div className="flex items-center gap-3">
                         <button
-                            className="lg:hidden p-2 -ml-2 text-slate-500 hover:bg-slate-100 rounded-lg"
+                            className="lg:hidden p-2 -ml-2 text-zd-muted hover:bg-zd-surface2 rounded-lg"
                             onClick={() => setIsSidebarOpen(true)}
                         >
                             <Menu size={20} />
                         </button>
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 flex items-center justify-center border border-white shadow-sm">
+                        <div className="w-9 h-9 rounded-full bg-zd-brandSoft text-zd-brand flex items-center justify-center border border-zd-surface shadow-sm">
                             <Brain size={18} />
                         </div>
                         <div>
-                            <h2 className="font-bold text-slate-900 text-sm">Gemini Assistant</h2>
+                            <h2 className="font-bold text-zd-ink text-sm">Gemini Assistant</h2>
                             <div className="flex items-center gap-1.5">
-                                <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-slate-300'}`}></span>
-                                <span className="text-xs text-slate-500 font-medium">{isConnected ? 'Active' : 'Connecting...'}</span>
+                                <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-zd-border'}`}></span>
+                                <span className="text-xs text-zd-muted font-medium">{isConnected ? 'Active' : 'Connecting...'}</span>
                             </div>
                         </div>
                     </div>
                     {/* Header Actions */}
                     <div className="flex items-center gap-2">
-                        <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors" title="Settings">
+                        <button className="p-2 text-zd-muted/70 hover:text-zd-ink hover:bg-zd-surface2 rounded-lg transition-colors" title="Settings">
                             <div className="w-5 h-5 flex items-center justify-center">
                                 <span className="text-xl leading-none pb-2">...</span>
                             </div>
@@ -436,27 +436,27 @@ function Chat() {
                 <div className="flex-1 overflow-y-auto pt-20 pb-36 px-4 lg:px-8 custom-scrollbar scroll-smooth">
                     {messages.length === 0 ? (
                         <div className="h-full flex flex-col items-center justify-center text-center max-w-3xl mx-auto p-4 animate-fade-in-up">
-                            <div className="w-20 h-20 bg-white rounded-3xl shadow-xl shadow-cyan-500/10 flex items-center justify-center mb-8 border border-white ring-4 ring-slate-50">
-                                <Brain size={40} className="text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-blue-600" />
+                            <div className="w-20 h-20 bg-zd-surface rounded-3xl shadow-xl shadow-[rgba(125,89,255,0.08)] flex items-center justify-center mb-8 border border-zd-surface ring-4 ring-zd-canvas">
+                                <Brain size={40} className="text-transparent bg-clip-text bg-gradient-to-br from-zd-brand to-zd-brand2" />
                             </div>
-                            <h2 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">How can I help you today?</h2>
-                            <p className="text-slate-500 mb-12 text-lg max-w-xl mx-auto leading-relaxed">I'm your advanced AI assistant. Ask me to write code, analyze data, or generate creative content.</p>
+                            <h2 className="text-4xl font-extrabold text-zd-ink mb-4 tracking-tight">How can I help you today?</h2>
+                            <p className="text-zd-muted mb-12 text-lg max-w-xl mx-auto leading-relaxed">I'm your advanced AI assistant. Ask me to write code, analyze data, or generate creative content.</p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full px-4">
                                 {[
-                                    { icon: Search, label: "Brainstorm ideas", sub: "for a marketing campaign", color: "text-purple-500", bg: "bg-purple-50 group-hover:bg-purple-100" },
-                                    { icon: Code, label: "Write code", sub: "for a react component", color: "text-blue-500", bg: "bg-blue-50 group-hover:bg-blue-100" },
-                                    { icon: PenTool, label: "Draft an email", sub: "to a client", color: "text-pink-500", bg: "bg-pink-50 group-hover:bg-pink-100" },
-                                    { icon: ImageIcon, label: "Explain concepts", sub: "in simple terms", color: "text-amber-500", bg: "bg-amber-50 group-hover:bg-amber-100" }
+                                    { icon: Search, label: "Brainstorm ideas", sub: "for a marketing campaign", color: "text-zd-brand", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" },
+                                    { icon: Code, label: "Write code", sub: "for a react component", color: "text-zd-brand2", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" },
+                                    { icon: PenTool, label: "Draft an email", sub: "to a client", color: "text-zd-brand", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" },
+                                    { icon: ImageIcon, label: "Explain concepts", sub: "in simple terms", color: "text-zd-brand2", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" }
                                 ].map((action, i) => (
-                                    <button key={i} className="p-5 bg-white hover:bg-white border border-slate-200/60 hover:border-cyan-300/50 rounded-2xl text-left transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/5 hover:-translate-y-1 group">
+                                    <button key={i} className="p-5 bg-zd-surface hover:bg-zd-surface border border-zd-border/80 hover:border-zd-brand/35 rounded-2xl text-left transition-all duration-300 hover:shadow-lg hover:shadow-[rgba(125,89,255,0.06)] hover:-translate-y-1 group">
                                         <div className="flex items-center gap-4 mb-2">
                                             <div className={`p-2.5 ${action.bg} ${action.color} rounded-xl transition-colors`}>
                                                 <action.icon size={20} />
                                             </div>
-                                            <span className="font-bold text-slate-800">{action.label}</span>
+                                            <span className="font-bold text-zd-ink">{action.label}</span>
                                         </div>
-                                        <div className="text-sm text-slate-400 pl-[3.25rem]">{action.sub}</div>
+                                        <div className="text-sm text-zd-muted/80 pl-[3.25rem]">{action.sub}</div>
                                     </button>
                                 ))}
                             </div>
@@ -466,25 +466,25 @@ function Chat() {
                             {messages.map((msg) => (
                                 <div key={msg.id} className={`flex gap-4 ${msg.sender === 'user' ? 'flex-row-reverse' : ''} animate-fade-in`}>
                                     <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm text-sm font-bold ${msg.sender === 'user'
-                                        ? 'bg-gradient-to-tr from-cyan-600 to-blue-600 text-white'
-                                        : 'bg-white border border-slate-200 text-cyan-600'
+                                        ? 'bg-gradient-to-tr from-zd-brand to-zd-brand2 text-white'
+                                        : 'bg-zd-surface border border-zd-border text-zd-brand'
                                         }`}>
                                         {msg.sender === 'user' ? 'I' : <Brain size={16} />}
                                     </div>
 
                                     <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[80%]`}>
                                         <div className={`py-3 px-5 rounded-2xl shadow-sm text-[15px] leading-relaxed ${msg.sender === 'user'
-                                            ? 'bg-cyan-600 text-white rounded-tr-none'
-                                            : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none'
+                                            ? 'bg-zd-brand text-white rounded-tr-none'
+                                            : 'bg-zd-surface border border-zd-border text-zd-ink rounded-tl-none'
                                             }`}>
                                             {msg.text}
                                         </div>
                                         <div className="flex items-center gap-2 mt-1.5 px-1">
-                                            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                                            <span className="text-[10px] uppercase font-bold text-zd-muted/70 tracking-wider">
                                                 {msg.timestamp}
                                             </span>
                                             {msg.sender === 'ai' && (
-                                                <button onClick={() => handlePlayMessage(msg.text)} className="text-slate-400 hover:text-cyan-600 transition-colors" title="Read aloud">
+                                                <button onClick={() => handlePlayMessage(msg.text)} className="text-zd-muted/70 hover:text-zd-brand transition-colors" title="Read aloud">
                                                     <Volume2 size={12} />
                                                 </button>
                                             )}
@@ -495,13 +495,13 @@ function Chat() {
 
                             {isTyping && (
                                 <div className="flex gap-4 animate-fade-in">
-                                    <div className="w-8 h-8 rounded-full bg-white border border-slate-200 text-cyan-600 flex items-center justify-center shadow-sm">
+                                    <div className="w-8 h-8 rounded-full bg-zd-surface border border-zd-border text-zd-brand flex items-center justify-center shadow-sm">
                                         <Brain size={16} />
                                     </div>
-                                    <div className="bg-white border border-slate-200 py-3 px-5 rounded-2xl rounded-tl-none shadow-sm flex items-center gap-1.5">
-                                        <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce"></div>
-                                        <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce delay-100"></div>
-                                        <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce delay-200"></div>
+                                    <div className="bg-zd-surface border border-zd-border py-3 px-5 rounded-2xl rounded-tl-none shadow-sm flex items-center gap-1.5">
+                                        <div className="w-2 h-2 bg-zd-brand rounded-full animate-bounce"></div>
+                                        <div className="w-2 h-2 bg-zd-brand rounded-full animate-bounce delay-100"></div>
+                                        <div className="w-2 h-2 bg-zd-brand rounded-full animate-bounce delay-200"></div>
                                     </div>
                                 </div>
                             )}
@@ -513,8 +513,8 @@ function Chat() {
                 {/* Input Area */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 z-30 pointer-events-none">
                     <div className="max-w-4xl mx-auto pointer-events-auto">
-                        <div className={`relative flex items-center gap-2 bg-white border transition-all duration-300 rounded-[2rem] p-2 shadow-2xl shadow-slate-200/60 ${inputMessage ? 'border-cyan-400 ring-4 ring-cyan-500/10' : 'border-slate-200'}`}>
-                            <button className="p-3 text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 rounded-full transition-colors shrink-0">
+                        <div className={`relative flex items-center gap-2 bg-zd-surface border transition-all duration-300 rounded-[2rem] p-2 shadow-2xl shadow-[rgba(31,27,26,0.06)] ${inputMessage ? 'border-zd-brand ring-4 ring-zd-brand/10' : 'border-zd-border'}`}>
+                            <button className="p-3 text-zd-muted/70 hover:text-zd-brand hover:bg-zd-brandSoft rounded-full transition-colors shrink-0">
                                 <Plus size={24} />
                             </button>
 
@@ -529,7 +529,7 @@ function Chat() {
                                         }
                                     }}
                                     placeholder="Message..."
-                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-slate-700 placeholder-slate-400 resize-none py-3 px-2 text-lg leading-relaxed max-h-32 custom-scrollbar"
+                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-zd-ink placeholder-zd-muted/70 resize-none py-3 px-2 text-lg leading-relaxed max-h-32 custom-scrollbar"
                                     rows={1}
                                     style={{ minHeight: '24px', boxShadow: 'none' }}
                                 />
@@ -538,7 +538,7 @@ function Chat() {
                             <div className="flex items-center gap-1 pr-1 shrink-0">
                                 {inputMessage && (
                                     <button
-                                        className={`p-2.5 rounded-full transition-all duration-300 ${isListening ? 'bg-red-50 text-red-500 animate-pulse' : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'}`}
+                                        className={`p-2.5 rounded-full transition-all duration-300 ${isListening ? 'bg-red-50 text-red-600 animate-pulse' : 'text-zd-muted/70 hover:text-zd-ink hover:bg-zd-surface2'}`}
                                         onClick={toggleVoiceInput}
                                         title="Voice Input"
                                     >
@@ -549,15 +549,15 @@ function Chat() {
                                     onClick={handleSendMessage}
                                     disabled={!inputMessage.trim() || !isConnected}
                                     className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center ${inputMessage.trim() && isConnected
-                                        ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/30 hover:bg-cyan-700 hover:scale-105 active:scale-95'
-                                        : 'bg-slate-100 text-slate-300 cursor-not-allowed'
+                                        ? 'bg-zd-brand text-white shadow-lg shadow-[rgba(125,89,255,0.30)] hover:bg-zd-brand2 hover:scale-105 active:scale-95'
+                                        : 'bg-zd-surface2 text-zd-muted/50 cursor-not-allowed'
                                         }`}
                                 >
                                     {inputMessage.trim() ? <Send size={20} className="ml-0.5" /> : <Mic size={22} />}
                                 </button>
                             </div>
                         </div>
-                        <div className="text-center mt-3 text-xs font-medium text-slate-400 flex items-center justify-center gap-2">
+                        <div className="text-center mt-3 text-xs font-medium text-zd-muted/70 flex items-center justify-center gap-2">
                             <span>Powered by Gemini AI</span>
                         </div>
                     </div>

@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    @apply bg-zd-canvas text-zd-ink font-sans antialiased;
   }
 }
 
@@ -16,7 +16,7 @@
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #06B6D4, #3b82f6);
+  background: linear-gradient(to right, #7D59FF, #6B44F7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
