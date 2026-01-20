@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Bot, Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
+import KyraLogo from './KyraLogo';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,21 +29,19 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-zd-surface/80 backdrop-blur-md border-b border-zd-border shadow-sm' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="p-2 bg-zd-ink rounded-lg group-hover:scale-105 transition-transform duration-300 text-zd-canvas shadow-sm">
-                <Bot className="w-6 h-6" />
-              </div>
+            <Link to="/" className="flex items-center gap-2 group" onClick={() => setIsOpen(false)}>
+              <KyraLogo size="md" />
               <span className="text-xl font-bold text-zd-ink">
-                AI Bot
+                Kyra Bot
               </span>
             </Link>
           </div>
 
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-8 flex items-baseline space-x-6">
               <Link to="/" className="text-sm font-medium text-zd-muted hover:text-zd-ink transition-colors">Home</Link>
               <Link to="/about" className="text-sm font-medium text-zd-muted hover:text-zd-ink transition-colors">About</Link>
             </div>
@@ -51,15 +50,18 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="flex items-center gap-4">
               {token ? (
-                <button onClick={handleLogout} className="text-zd-muted hover:text-zd-ink px-3 py-2 text-sm font-medium transition-colors">
-                  Logout
-                </button>
+                <Link
+                  to="/chat"
+                  className="text-zd-muted hover:text-zd-ink px-2.5 py-2 text-sm font-medium transition-colors"
+                >
+                  Open Chat
+                </Link>
               ) : (
                 <>
-                  <Link to="/login" className="text-zd-muted hover:text-zd-ink px-3 py-2 text-sm font-medium transition-colors">
+                  <Link to="/login" className="text-zd-muted hover:text-zd-ink px-2.5 py-2 text-sm font-medium transition-colors">
                     Log In
                   </Link>
-                  <Link to="/signup" className="group relative px-4 py-2 bg-zd-brand hover:bg-zd-brand2 text-white text-sm font-bold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(125,89,255,0.25)] hover:shadow-[0_0_30px_rgba(125,89,255,0.35)]">
+                  <Link to="/signup" className="group relative px-3.5 py-2 bg-zd-brand hover:bg-zd-brand2 text-white text-sm font-bold rounded-full transition-all duration-300 shadow-[0_0_18px_rgba(125,89,255,0.22)] hover:shadow-[0_0_26px_rgba(125,89,255,0.32)]">
                     <span className="relative z-10 flex items-center gap-1">
                       Get Started <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -84,20 +86,24 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-zd-surface/95 backdrop-blur-xl border-b border-zd-border">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium text-zd-ink hover:bg-zd-surface2">Home</Link>
-            <Link to="/about" className="block px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2">About</Link>
+            <Link to="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-zd-ink hover:bg-zd-surface2">Home</Link>
+            <Link to="/about" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2">About</Link>
             {!token && (
               <>
-                <Link to="/login" className="block px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2">Log In</Link>
-                <Link to="/signup" className="block w-full text-center mt-4 px-5 py-3 rounded-lg bg-zd-brand hover:bg-zd-brand2 text-white font-bold">
+                <Link to="/login" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2">Log In</Link>
+                <Link to="/signup" onClick={() => setIsOpen(false)} className="block w-full text-center mt-4 px-5 py-3 rounded-lg bg-zd-brand hover:bg-zd-brand2 text-white font-bold">
                   Get Started
                 </Link>
               </>
             )}
             {token && (
-              <button onClick={handleLogout} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2">
-                Logout
-              </button>
+              <Link
+                to="/chat"
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2"
+              >
+                Open Chat
+              </Link>
             )}
           </div>
         </div>

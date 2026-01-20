@@ -15,10 +15,10 @@ export default function Home() {
 
     return (
         <div className="min-h-screen bg-zd-canvas overflow-x-hidden pt-16">
-            <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-zd-surface2 to-zd-canvas pointer-events-none"></div>
+            <div className="absolute top-0 left-0 w-full h-[320px] sm:h-[420px] lg:h-[500px] bg-gradient-to-b from-zd-surface2 to-zd-canvas pointer-events-none"></div>
 
             {/* Hero Section */}
-            <section className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+            <section className="relative pt-16 pb-16 md:pt-20 md:pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div className="text-center lg:text-left">
@@ -41,7 +41,7 @@ export default function Home() {
                                 </Link>
                             </div>
                         </div>
-                        <div className="relative h-[400px] lg:h-[500px] w-full overflow-hidden">
+                        <div className="relative h-[260px] sm:h-[340px] lg:h-[500px] w-full overflow-hidden">
                             <NeuralNetwork />
                         </div>
                     </div>
@@ -68,8 +68,8 @@ export default function Home() {
             </section>
 
             {/* Use Cases */}
-            <section className="py-24 bg-zd-surface relative">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-zd-brandSoft rounded-full blur-3xl pointer-events-none opacity-50"></div>
+            <section className="py-20 md:py-24 bg-zd-surface relative">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] sm:w-[480px] sm:h-[480px] lg:w-[600px] lg:h-[600px] bg-zd-brandSoft rounded-full blur-3xl pointer-events-none opacity-50"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold text-zd-ink mb-4">Tailored for Every Workflow</h2>
@@ -94,7 +94,7 @@ export default function Home() {
             </section>
 
             {/* Core Capabilities */}
-            <section className="py-24 bg-zd-canvas">
+            <section className="py-20 md:py-24 bg-zd-canvas">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-zd-ink">Core Capabilities</h2>
@@ -125,7 +125,7 @@ export default function Home() {
             </section>
 
             {/* CTA */}
-            <section className="py-24 relative overflow-hidden">
+            <section className="py-20 md:py-24 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-zd-brandSoft to-zd-surface2 opacity-70"></div>
                 <div className="max-w-4xl mx-auto px-4 relative z-10 text-center bg-zd-surface p-12 rounded-3xl border border-zd-border shadow-xl">
                     <h2 className="text-4xl md:text-5xl font-bold text-zd-ink mb-6">Ready to build the future?</h2>
@@ -142,7 +142,7 @@ export default function Home() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-zd-surface py-12 border-t border-zd-border">
+            <footer className="bg-zd-surface py-10 md:py-12 border-t border-zd-border">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid md:grid-cols-4 gap-8 mb-8">
                         <div className="col-span-1 md:col-span-2">
@@ -150,7 +150,7 @@ export default function Home() {
                                 <div className="p-1.5 bg-zd-ink rounded-lg text-zd-canvas">
                                     <Cpu size={24} />
                                 </div>
-                                <span className="text-2xl font-bold text-zd-ink">AI Bot</span>
+                                <span className="text-2xl font-bold text-zd-ink">Kyra Bot</span>
                             </div>
                             <p className="text-zd-muted max-w-xs">The world's most advanced AI platform for the next generation of digital creators and builders.</p>
                         </div>
@@ -174,7 +174,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="pt-8 border-t border-zd-border flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="text-zd-muted text-sm">© 2024 AI Bot Technologies Inc.</div>
+                        <div className="text-zd-muted text-sm">© 2024 Kyra Bot Technologies Inc.</div>
                         <div className="flex gap-4">
                             <a href="#" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Twitter size={20} /></a>
                             <a href="#" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Github size={20} /></a>

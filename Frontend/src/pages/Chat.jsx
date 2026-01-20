@@ -279,7 +279,7 @@ function Chat() {
     };
 
     return (
-        <div className="flex h-screen bg-zd-canvas overflow-hidden font-sans text-zd-ink">
+        <div className="flex h-[100dvh] bg-zd-canvas overflow-hidden font-sans text-zd-ink">
             {/* Mobile Overlay */}
             {isSidebarOpen && (
                 <div
@@ -289,15 +289,15 @@ function Chat() {
             )}
 
             {/* Sidebar */}
-            <div className={`fixed lg:relative z-50 w-80 h-full bg-zd-surface border-r border-zd-border transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+            <div className={`fixed lg:relative z-50 w-[18rem] sm:w-80 h-full bg-zd-surface border-r border-zd-border transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
                 {/* Sidebar Header */}
                 <div className="h-16 flex items-center justify-between px-6 border-b border-zd-border bg-zd-surface/60 backdrop-blur-md">
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-zd-brand to-zd-brand2 flex items-center justify-center text-white shadow-lg shadow-[rgba(125,89,255,0.25)]">
-                            <MessageCircle size={18} />
+                            <span className="font-extrabold text-xs">K</span>
                         </div>
                         <div>
-                            <h1 className="font-bold text-lg tracking-tight text-zd-ink">AI ChatBot</h1>
+                            <h1 className="font-bold text-lg tracking-tight text-zd-ink">Kyra Bot</h1>
                             <div className="flex items-center gap-1.5">
                                 <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-zd-border'}`}></span>
                                 <span className="text-xs font-medium text-zd-muted">{isConnected ? 'Online' : 'Offline'}</span>
@@ -401,9 +401,9 @@ function Chat() {
             </div>
 
             {/* Main Chat Area */}
-            <div className="flex-1 flex flex-col h-full relative bg-gradient-to-br from-zd-canvas to-zd-surface2">
+            <div className="flex-1 min-w-0 flex flex-col h-full bg-gradient-to-br from-zd-canvas to-zd-surface2">
                 {/* Chat Header */}
-                <div className="h-16 bg-zd-surface/70 backdrop-blur-xl border-b border-zd-border/70 flex items-center justify-between px-4 lg:px-8 absolute top-0 left-0 right-0 z-30">
+                <div className="h-16 bg-zd-surface/70 backdrop-blur-xl border-b border-zd-border/70 flex items-center justify-between px-4 lg:px-8 shrink-0">
                     <div className="flex items-center gap-3">
                         <button
                             className="lg:hidden p-2 -ml-2 text-zd-muted hover:bg-zd-surface2 rounded-lg"
@@ -412,10 +412,10 @@ function Chat() {
                             <Menu size={20} />
                         </button>
                         <div className="w-9 h-9 rounded-full bg-zd-brandSoft text-zd-brand flex items-center justify-center border border-zd-surface shadow-sm">
-                            <Brain size={18} />
+                            <span className="font-extrabold text-xs">K</span>
                         </div>
                         <div>
-                            <h2 className="font-bold text-zd-ink text-sm">Gemini Assistant</h2>
+                            <h2 className="font-bold text-zd-ink text-sm">Kyra Bot</h2>
                             <div className="flex items-center gap-1.5">
                                 <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-zd-border'}`}></span>
                                 <span className="text-xs text-zd-muted font-medium">{isConnected ? 'Active' : 'Connecting...'}</span>
@@ -433,23 +433,24 @@ function Chat() {
                 </div>
 
                 {/* Messages Area */}
-                <div className="flex-1 overflow-y-auto pt-20 pb-36 px-4 lg:px-8 custom-scrollbar scroll-smooth">
+                <div className="flex-1 min-h-0 overflow-y-auto px-4 lg:px-8 py-5 custom-scrollbar scroll-smooth">
                     {messages.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center text-center max-w-3xl mx-auto p-4 animate-fade-in-up">
-                            <div className="w-20 h-20 bg-zd-surface rounded-3xl shadow-xl shadow-[rgba(125,89,255,0.08)] flex items-center justify-center mb-8 border border-zd-surface ring-4 ring-zd-canvas">
-                                <Brain size={40} className="text-transparent bg-clip-text bg-gradient-to-br from-zd-brand to-zd-brand2" />
-                            </div>
-                            <h2 className="text-4xl font-extrabold text-zd-ink mb-4 tracking-tight">How can I help you today?</h2>
-                            <p className="text-zd-muted mb-12 text-lg max-w-xl mx-auto leading-relaxed">I'm your advanced AI assistant. Ask me to write code, analyze data, or generate creative content.</p>
+                        <div className="min-h-full flex flex-col items-center justify-start sm:justify-center text-center max-w-3xl mx-auto py-6 sm:py-0 animate-fade-in-up">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-zd-ink mb-3 sm:mb-4 tracking-tight px-2">
+                                How can I help you today?
+                            </h2>
+                            <p className="text-zd-muted mb-8 sm:mb-12 text-sm sm:text-base lg:text-lg max-w-xl mx-auto leading-relaxed px-4">
+                                I'm your advanced AI assistant. Ask me to write code, analyze data, or generate creative content.
+                            </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full px-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full px-2 sm:px-4">
                                 {[
                                     { icon: Search, label: "Brainstorm ideas", sub: "for a marketing campaign", color: "text-zd-brand", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" },
                                     { icon: Code, label: "Write code", sub: "for a react component", color: "text-zd-brand2", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" },
                                     { icon: PenTool, label: "Draft an email", sub: "to a client", color: "text-zd-brand", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" },
                                     { icon: ImageIcon, label: "Explain concepts", sub: "in simple terms", color: "text-zd-brand2", bg: "bg-zd-brandSoft group-hover:bg-zd-brandSoft/70" }
                                 ].map((action, i) => (
-                                    <button key={i} className="p-5 bg-zd-surface hover:bg-zd-surface border border-zd-border/80 hover:border-zd-brand/35 rounded-2xl text-left transition-all duration-300 hover:shadow-lg hover:shadow-[rgba(125,89,255,0.06)] hover:-translate-y-1 group">
+                                    <button key={i} className="p-4 sm:p-5 bg-zd-surface hover:bg-zd-surface border border-zd-border/80 hover:border-zd-brand/35 rounded-2xl text-left transition-all duration-300 hover:shadow-lg hover:shadow-[rgba(125,89,255,0.06)] hover:-translate-y-1 group">
                                         <div className="flex items-center gap-4 mb-2">
                                             <div className={`p-2.5 ${action.bg} ${action.color} rounded-xl transition-colors`}>
                                                 <action.icon size={20} />
@@ -472,8 +473,8 @@ function Chat() {
                                         {msg.sender === 'user' ? 'I' : <Brain size={16} />}
                                     </div>
 
-                                    <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[80%]`}>
-                                        <div className={`py-3 px-5 rounded-2xl shadow-sm text-[15px] leading-relaxed ${msg.sender === 'user'
+                                    <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[88%] sm:max-w-[80%]`}>
+                                        <div className={`py-3 px-5 rounded-2xl shadow-sm text-[15px] leading-relaxed break-words whitespace-pre-wrap ${msg.sender === 'user'
                                             ? 'bg-zd-brand text-white rounded-tr-none'
                                             : 'bg-zd-surface border border-zd-border text-zd-ink rounded-tl-none'
                                             }`}>
@@ -511,8 +512,8 @@ function Chat() {
                 </div>
 
                 {/* Input Area */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 z-30 pointer-events-none">
-                    <div className="max-w-4xl mx-auto pointer-events-auto">
+                <div className="px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:p-6 border-t border-zd-border/60 bg-zd-surface/70 backdrop-blur-xl shrink-0">
+                    <div className="max-w-4xl mx-auto">
                         <div className={`relative flex items-center gap-2 bg-zd-surface border transition-all duration-300 rounded-[2rem] p-2 shadow-2xl shadow-[rgba(31,27,26,0.06)] ${inputMessage ? 'border-zd-brand ring-4 ring-zd-brand/10' : 'border-zd-border'}`}>
                             <button className="p-3 text-zd-muted/70 hover:text-zd-brand hover:bg-zd-brandSoft rounded-full transition-colors shrink-0">
                                 <Plus size={24} />
@@ -529,7 +530,7 @@ function Chat() {
                                         }
                                     }}
                                     placeholder="Message..."
-                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-zd-ink placeholder-zd-muted/70 resize-none py-3 px-2 text-lg leading-relaxed max-h-32 custom-scrollbar"
+                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-zd-ink placeholder-zd-muted/70 resize-none py-3 px-2 text-base sm:text-lg leading-relaxed max-h-32 custom-scrollbar"
                                     rows={1}
                                     style={{ minHeight: '24px', boxShadow: 'none' }}
                                 />
@@ -558,7 +559,7 @@ function Chat() {
                             </div>
                         </div>
                         <div className="text-center mt-3 text-xs font-medium text-zd-muted/70 flex items-center justify-center gap-2">
-                            <span>Powered by Gemini AI</span>
+                            <span>Powered by Kyra Bot</span>
                         </div>
                     </div>
                 </div>

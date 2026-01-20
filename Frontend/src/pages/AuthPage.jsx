@@ -49,7 +49,7 @@ export default function AuthPage({ type }) {
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         </Link>
 
-        <h1 className="text-5xl lg:text-6xl font-extrabold text-zd-ink leading-tight mb-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-zd-ink leading-tight mb-6">
           {isLogin ? 'Welcome back' : 'Create your account'} <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-zd-brand to-zd-brand2">
             {isLogin ? 'Let’s pick up where you left off.' : 'Start building with AI today.'}
