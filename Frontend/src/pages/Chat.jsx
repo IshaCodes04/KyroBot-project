@@ -18,7 +18,9 @@ import {
     Sun,
     Moon,
     Mic,
-    LogOut
+    LogOut,
+    Code,
+    PenTool
 } from 'lucide-react';
 
 function Chat() {
@@ -277,281 +279,287 @@ function Chat() {
     };
 
     return (
-        <div className={`chat-app-layout theme-${theme}`}>
+        <div className="flex h-screen bg-slate-50 overflow-hidden font-sans text-slate-900">
             {/* Mobile Overlay */}
             {isSidebarOpen && (
                 <div
-                    className="sidebar-overlay"
+                    className="fixed inset-0 bg-slate-900/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"
                     onClick={() => setIsSidebarOpen(false)}
                 ></div>
             )}
 
             {/* Sidebar */}
-            <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-                <div className="sidebar-header">
-                    <div className="app-logo">
-                        <MessageCircle size={28} />
-                    </div>
-                    <div className="app-info">
-                        <h1 className="app-title">AI-ChatBot</h1>
-                        <div className="app-status">
-                            <span className={`status-dot ${isConnected ? 'online' : ''}`}></span>
-                            {isConnected ? 'Online' : 'Offline'}
+            <div className={`fixed lg:relative z-50 w-80 h-full bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+                {/* Sidebar Header */}
+                <div className="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-white/50 backdrop-blur-md">
+                    <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/30">
+                            <MessageCircle size={18} />
+                        </div>
+                        <div>
+                            <h1 className="font-bold text-lg tracking-tight text-slate-900">AI ChatBot</h1>
+                            <div className="flex items-center gap-1.5">
+                                <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-slate-300'}`}></span>
+                                <span className="text-xs font-medium text-slate-500">{isConnected ? 'Online' : 'Offline'}</span>
+                            </div>
                         </div>
                     </div>
                     <button
-                        className="sidebar-close-btn"
+                        className="lg:hidden p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 transition-colors"
                         onClick={() => setIsSidebarOpen(false)}
                     >
-                        <X size={24} />
+                        <X size={20} />
                     </button>
                 </div>
 
-                <button className="new-chat-btn" onClick={handleNewChat}>
-                    <Plus size={20} />
-                    New Chat
-                </button>
-
-                <div className="search-container">
-                    <Search size={18} className="search-icon" />
-                    <input
-                        type="text"
-                        placeholder="Search conversations..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="search-input"
-                    />
-                    {searchQuery && (
-                        <button
-                            className="clear-search-btn"
-                            onClick={() => setSearchQuery('')}
-                        >
-                            <X size={16} />
-                        </button>
-                    )}
+                {/* New Chat Button */}
+                <div className="p-4">
+                    <button
+                        onClick={handleNewChat}
+                        className="w-full py-3.5 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-95"
+                    >
+                        <Plus size={20} />
+                        <span>New Conversation</span>
+                    </button>
                 </div>
 
-                <div className="conversations-section">
-                    <h3 className="conversations-title">RECENT CONVERSATIONS</h3>
-                    <div className="conversations-list">
-                        {filteredConversations.length > 0 ? (
-                            filteredConversations.map(conv => (
-                                <div
-                                    key={conv.id}
-                                    className={`conversation-item ${currentConversationId === conv.id ? 'active' : ''}`}
-                                    onClick={() => handleConversationClick(conv.id)}
-                                >
-                                    <div className="conv-icon">
-                                        <MessageCircle size={20} />
-                                    </div>
-                                    <div className="conversation-content">
-                                        <div className="conversation-title">{conv.title}</div>
-                                        <div className="conversation-time">{conv.timestamp}</div>
-                                    </div>
-                                    <button
-                                        className="delete-conversation-btn"
-                                        onClick={(e) => handleDeleteConversation(conv.id, e)}
-                                        title="Delete conversation"
-                                    >
-                                        <Trash2 size={16} />
-                                    </button>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="no-conversations">
-                                {searchQuery ? 'No conversations found' : 'No conversations yet'}
-                            </div>
+                {/* Search */}
+                <div className="px-4 mb-2">
+                    <div className="relative group">
+                        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-cyan-600 transition-colors" />
+                        <input
+                            type="text"
+                            placeholder="Search chats..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full py-2.5 pl-10 pr-8 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all"
+                        />
+                        {searchQuery && (
+                            <button
+                                onClick={() => setSearchQuery('')}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                            >
+                                <X size={14} />
+                            </button>
                         )}
                     </div>
                 </div>
 
-                <div className="sidebar-footer">
-                    <button className="sidebar-btn logout-btn" onClick={handleLogout}>
-                        <LogOut size={18} />
-                        Logout
-                    </button>
-                    <div className="user-info">
-                        <div className="user-avatar">{user?.fullName?.[0]?.toUpperCase() || 'U'}</div>
-                        <div className="user-details">
-                            <div className="user-name">{user?.fullName || 'User'}</div>
-                            <div className="user-email">{user?.email || 'user@example.com'}</div>
+                {/* Conversations List */}
+                <div className="flex-1 overflow-y-auto py-2 px-3 space-y-1 custom-scrollbar">
+                    <h3 className="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 mt-4">History</h3>
+                    {filteredConversations.length > 0 ? (
+                        filteredConversations.map(conv => (
+                            <div
+                                key={conv.id}
+                                onClick={() => handleConversationClick(conv.id)}
+                                className={`group relative p-3 rounded-xl cursor-pointer transition-all ${currentConversationId === conv.id
+                                    ? 'bg-cyan-50 text-cyan-900 border border-cyan-100 shadow-sm'
+                                    : 'hover:bg-slate-50 text-slate-600 hover:text-slate-900 border border-transparent'
+                                    }`}
+                            >
+                                <div className="flex items-start gap-3">
+                                    <MessageCircle size={18} className={`mt-1 shrink-0 ${currentConversationId === conv.id ? 'text-cyan-600' : 'text-slate-400'}`} />
+                                    <div className="flex-1 min-w-0 pr-6">
+                                        <h4 className="font-medium truncate text-sm">{conv.title}</h4>
+                                        <p className={`text-xs truncate mt-0.5 ${currentConversationId === conv.id ? 'text-cyan-600/70' : 'text-slate-400'}`}>
+                                            {conv.lastMessage}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={(e) => handleDeleteConversation(conv.id, e)}
+                                    className="absolute right-2 top-3 p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
+                                >
+                                    <Trash2 size={14} />
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="flex flex-col items-center justify-center h-40 text-slate-400 text-sm">
+                            <MessageCircle size={32} className="mb-2 opacity-20" />
+                            <p>{searchQuery ? 'No chats found' : 'No history yet'}</p>
                         </div>
+                    )}
+                </div>
+
+                {/* User Profile */}
+                <div className="p-4 border-t border-slate-200 bg-slate-50/50">
+                    <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-white transition-colors border border-transparent hover:border-slate-200 hover:shadow-sm group">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+                            {user?.fullName?.[0]?.toUpperCase() || 'U'}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm text-slate-900 truncate">{user?.fullName || 'User'}</div>
+                            <div className="text-xs text-slate-500 truncate">{user?.email || 'user@example.com'}</div>
+                        </div>
+                        <button onClick={handleLogout} className="p-2 text-slate-400 hover:text-red-500 transition-colors" title="Logout">
+                            <LogOut size={18} />
+                        </button>
                     </div>
                 </div>
             </div>
 
             {/* Main Chat Area */}
-            <div className="chat-container">
-                <div className="chat-header">
-                    <div className="chat-header-left">
+            <div className="flex-1 flex flex-col h-full relative bg-gradient-to-br from-slate-50 to-blue-50/50">
+                {/* Chat Header */}
+                <div className="h-16 bg-white/70 backdrop-blur-xl border-b border-slate-200/60 flex items-center justify-between px-4 lg:px-8 absolute top-0 left-0 right-0 z-30">
+                    <div className="flex items-center gap-3">
                         <button
-                            className="mobile-menu-btn"
-                            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            aria-label="Toggle menu"
+                            className="lg:hidden p-2 -ml-2 text-slate-500 hover:bg-slate-100 rounded-lg"
+                            onClick={() => setIsSidebarOpen(true)}
                         >
-                            <Menu size={24} />
+                            <Menu size={20} />
                         </button>
-                        <div className="ai-avatar">
-                            <Brain size={24} />
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 flex items-center justify-center border border-white shadow-sm">
+                            <Brain size={18} />
                         </div>
-                        <div className="ai-info">
-                            <div className="ai-name">AI Assistant</div>
-                            <div className="ai-status">
-                                <span className={`status-dot ${isConnected ? 'active' : ''}`}></span>
-                                {isConnected ? 'Active now' : 'Offline'}
+                        <div>
+                            <h2 className="font-bold text-slate-900 text-sm">Gemini Assistant</h2>
+                            <div className="flex items-center gap-1.5">
+                                <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-slate-300'}`}></span>
+                                <span className="text-xs text-slate-500 font-medium">{isConnected ? 'Active' : 'Connecting...'}</span>
                             </div>
                         </div>
                     </div>
-                    <div className="header-actions">
-                        <div className="theme-switcher">
-                            <button
-                                className={`theme-option ${theme === 'light' ? 'active' : ''}`}
-                                onClick={() => switchTheme('light')}
-                                title="Light Theme"
-                            >
-                                <Sun size={18} />
-                            </button>
-                            <button
-                                className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
-                                onClick={() => switchTheme('dark')}
-                                title="Dark Theme"
-                            >
-                                <Moon size={18} />
-                            </button>
-                            <button
-                                className={`theme-option ${theme === 'pink' ? 'active' : ''}`}
-                                onClick={() => switchTheme('pink')}
-                                title="Pink Theme"
-                            >
-                                <div className="pink-icon"></div>
-                            </button>
-                        </div>
+                    {/* Header Actions */}
+                    <div className="flex items-center gap-2">
+                        <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors" title="Settings">
+                            <div className="w-5 h-5 flex items-center justify-center">
+                                <span className="text-xl leading-none pb-2">...</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
 
-                <div className="messages-container">
+                {/* Messages Area */}
+                <div className="flex-1 overflow-y-auto pt-20 pb-36 px-4 lg:px-8 custom-scrollbar scroll-smooth">
                     {messages.length === 0 ? (
-                        <div className="welcome-screen">
-                            <h1 className="welcome-title">How can I help today?</h1>
-                            <p className="welcome-subtitle">
-                                I'm your AI assistant, ready to help with questions, creative tasks, analysis, and more.
-                                <br />Ask me anything!
-                            </p>
-                            <div className="quick-actions">
-                                <button className="quick-action-btn">
-                                    <Search size={18} />
-                                    Deep Search
-                                </button>
-                                <button className="quick-action-btn">
-                                    <Brain size={18} />
-                                    Think
-                                </button>
-                                <button className="quick-action-btn">
-                                    <ImageIcon size={18} />
-                                    Edit Image
-                                </button>
-                                <button className="quick-action-btn">
-                                    <BarChart3 size={18} />
-                                    Analyze
-                                </button>
+                        <div className="h-full flex flex-col items-center justify-center text-center max-w-3xl mx-auto p-4 animate-fade-in-up">
+                            <div className="w-20 h-20 bg-white rounded-3xl shadow-xl shadow-cyan-500/10 flex items-center justify-center mb-8 border border-white ring-4 ring-slate-50">
+                                <Brain size={40} className="text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-blue-600" />
+                            </div>
+                            <h2 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">How can I help you today?</h2>
+                            <p className="text-slate-500 mb-12 text-lg max-w-xl mx-auto leading-relaxed">I'm your advanced AI assistant. Ask me to write code, analyze data, or generate creative content.</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full px-4">
+                                {[
+                                    { icon: Search, label: "Brainstorm ideas", sub: "for a marketing campaign", color: "text-purple-500", bg: "bg-purple-50 group-hover:bg-purple-100" },
+                                    { icon: Code, label: "Write code", sub: "for a react component", color: "text-blue-500", bg: "bg-blue-50 group-hover:bg-blue-100" },
+                                    { icon: PenTool, label: "Draft an email", sub: "to a client", color: "text-pink-500", bg: "bg-pink-50 group-hover:bg-pink-100" },
+                                    { icon: ImageIcon, label: "Explain concepts", sub: "in simple terms", color: "text-amber-500", bg: "bg-amber-50 group-hover:bg-amber-100" }
+                                ].map((action, i) => (
+                                    <button key={i} className="p-5 bg-white hover:bg-white border border-slate-200/60 hover:border-cyan-300/50 rounded-2xl text-left transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/5 hover:-translate-y-1 group">
+                                        <div className="flex items-center gap-4 mb-2">
+                                            <div className={`p-2.5 ${action.bg} ${action.color} rounded-xl transition-colors`}>
+                                                <action.icon size={20} />
+                                            </div>
+                                            <span className="font-bold text-slate-800">{action.label}</span>
+                                        </div>
+                                        <div className="text-sm text-slate-400 pl-[3.25rem]">{action.sub}</div>
+                                    </button>
+                                ))}
                             </div>
                         </div>
                     ) : (
-                        <>
+                        <div className="space-y-6 max-w-4xl mx-auto">
                             {messages.map((msg) => (
-                                <div key={msg.id} className={`message ${msg.sender}`}>
-                                    {msg.sender === 'ai' && (
-                                        <div className="message-avatar">
-                                            <Brain size={20} />
+                                <div key={msg.id} className={`flex gap-4 ${msg.sender === 'user' ? 'flex-row-reverse' : ''} animate-fade-in`}>
+                                    <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm text-sm font-bold ${msg.sender === 'user'
+                                        ? 'bg-gradient-to-tr from-cyan-600 to-blue-600 text-white'
+                                        : 'bg-white border border-slate-200 text-cyan-600'
+                                        }`}>
+                                        {msg.sender === 'user' ? 'I' : <Brain size={16} />}
+                                    </div>
+
+                                    <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[80%]`}>
+                                        <div className={`py-3 px-5 rounded-2xl shadow-sm text-[15px] leading-relaxed ${msg.sender === 'user'
+                                            ? 'bg-cyan-600 text-white rounded-tr-none'
+                                            : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none'
+                                            }`}>
+                                            {msg.text}
                                         </div>
-                                    )}
-                                    <div className="message-wrapper">
-                                        <div className="message-content">
-                                            <div className="message-text">{msg.text}</div>
-                                            <button
-                                                className="message-play-btn"
-                                                onClick={() => handlePlayMessage(msg.text)}
-                                                title="Play message"
-                                            >
-                                                <Volume2 size={16} />
-                                            </button>
-                                        </div>
-                                        <div className="message-meta">
-                                            {msg.timestamp} • {msg.date} • AI-ChatBot
+                                        <div className="flex items-center gap-2 mt-1.5 px-1">
+                                            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                                                {msg.timestamp}
+                                            </span>
+                                            {msg.sender === 'ai' && (
+                                                <button onClick={() => handlePlayMessage(msg.text)} className="text-slate-400 hover:text-cyan-600 transition-colors" title="Read aloud">
+                                                    <Volume2 size={12} />
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
-                                    {msg.sender === 'user' && (
-                                        <div className="message-avatar user">
-                                            I
-                                        </div>
-                                    )}
                                 </div>
                             ))}
+
                             {isTyping && (
-                                <div className="message ai">
-                                    <div className="message-avatar">
-                                        <Brain size={20} />
+                                <div className="flex gap-4 animate-fade-in">
+                                    <div className="w-8 h-8 rounded-full bg-white border border-slate-200 text-cyan-600 flex items-center justify-center shadow-sm">
+                                        <Brain size={16} />
                                     </div>
-                                    <div className="message-wrapper">
-                                        <div className="message-content">
-                                            <div className="typing-indicator">
-                                                <span></span>
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                            <span className="typing-text">AI is thinking...</span>
-                                        </div>
+                                    <div className="bg-white border border-slate-200 py-3 px-5 rounded-2xl rounded-tl-none shadow-sm flex items-center gap-1.5">
+                                        <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce"></div>
+                                        <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce delay-100"></div>
+                                        <div className="w-2 h-2 bg-cyan-500 rounded-full animate-bounce delay-200"></div>
                                     </div>
                                 </div>
                             )}
                             <div ref={messagesEndRef} />
-                        </>
+                        </div>
                     )}
                 </div>
 
-                <div className="input-container">
-                    <div className={`input-wrapper ${inputMessage ? 'has-text' : ''} ${isListening ? 'listening' : ''}`}>
-                        <button type="button" className="input-icon-btn">
-                            <Paperclip size={20} />
-                        </button>
-                        <form onSubmit={handleSendMessage} className="input-form">
-                            <input
-                                type="text"
-                                value={inputMessage}
-                                onChange={(e) => setInputMessage(e.target.value)}
-                                placeholder="Type your message..."
-                                className="message-input"
-                            />
-                        </form>
-                        <button
-                            type="button"
-                            className={`input-icon-btn mic-btn ${isListening ? 'active' : ''}`}
-                            onClick={toggleVoiceInput}
-                            title={isListening ? 'Stop listening' : 'Start voice input'}
-                        >
-                            <Mic size={20} />
-                        </button>
-                        <button
-                            type="submit"
-                            className="send-btn"
-                            disabled={!inputMessage.trim() || !isConnected}
-                            onClick={handleSendMessage}
-                        >
-                            <Send size={20} />
-                        </button>
-                    </div>
-                    <div className="input-status">
-                        <span className={`status-indicator ${isConnected ? 'online' : 'offline'}`}></span>
-                        <span className="status-text">AI {isConnected ? 'Online' : 'Offline'}</span>
-                        <span className="status-divider">•</span>
-                        <span className="encryption-text">🔒 End-to-end encrypted</span>
-                        <span className="status-divider">•</span>
-                        <span className="powered-text">🎤 Voice enabled</span>
-                        <span className="status-divider">•</span>
-                        <span className="powered-text">🔊 Text-to-speech</span>
-                    </div>
-                    <div className="powered-by">
-                        Powered by Gemini AI
+                {/* Input Area */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-6 z-30 pointer-events-none">
+                    <div className="max-w-4xl mx-auto pointer-events-auto">
+                        <div className={`relative flex items-center gap-2 bg-white border transition-all duration-300 rounded-[2rem] p-2 shadow-2xl shadow-slate-200/60 ${inputMessage ? 'border-cyan-400 ring-4 ring-cyan-500/10' : 'border-slate-200'}`}>
+                            <button className="p-3 text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 rounded-full transition-colors shrink-0">
+                                <Plus size={24} />
+                            </button>
+
+                            <form onSubmit={handleSendMessage} className="flex-1 flex items-center">
+                                <textarea
+                                    value={inputMessage}
+                                    onChange={(e) => setInputMessage(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault();
+                                            handleSendMessage(e);
+                                        }
+                                    }}
+                                    placeholder="Message..."
+                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-slate-700 placeholder-slate-400 resize-none py-3 px-2 text-lg leading-relaxed max-h-32 custom-scrollbar"
+                                    rows={1}
+                                    style={{ minHeight: '24px', boxShadow: 'none' }}
+                                />
+                            </form>
+
+                            <div className="flex items-center gap-1 pr-1 shrink-0">
+                                {inputMessage && (
+                                    <button
+                                        className={`p-2.5 rounded-full transition-all duration-300 ${isListening ? 'bg-red-50 text-red-500 animate-pulse' : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'}`}
+                                        onClick={toggleVoiceInput}
+                                        title="Voice Input"
+                                    >
+                                        <Mic size={22} />
+                                    </button>
+                                )}
+                                <button
+                                    onClick={handleSendMessage}
+                                    disabled={!inputMessage.trim() || !isConnected}
+                                    className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center ${inputMessage.trim() && isConnected
+                                        ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/30 hover:bg-cyan-700 hover:scale-105 active:scale-95'
+                                        : 'bg-slate-100 text-slate-300 cursor-not-allowed'
+                                        }`}
+                                >
+                                    {inputMessage.trim() ? <Send size={20} className="ml-0.5" /> : <Mic size={22} />}
+                                </button>
+                            </div>
+                        </div>
+                        <div className="text-center mt-3 text-xs font-medium text-slate-400 flex items-center justify-center gap-2">
+                            <span>Powered by Gemini AI</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -559,4 +567,4 @@ function Chat() {
     );
 }
 
-export default Chat; 
+export default Chat;

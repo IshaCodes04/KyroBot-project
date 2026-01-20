@@ -1,208 +1,184 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import './AuthPage.css'
-import {
-  User,
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  ArrowLeft,
-  Bot,
-  MessageSquare,
-  Zap,
-  Shield,
-  ChevronRight
-} from 'lucide-react'
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { Mail, Lock, ArrowLeft, Chrome, Sparkles, Activity, Zap, Stars, User } from 'lucide-react';
 
-export default function AuthPage({ type = 'login' }) {
-  const [authType, setAuthType] = useState(type)
-  const [isLoading, setIsLoading] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-  })
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
+export default function AuthPage({ type }) {
+  const isLogin = type === 'login';
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+  // Animation state
+  const [loadState, setLoadState] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError('')
-    try {
-      const endpoint = authType === 'login' ? '/api/auth/login' : '/api/auth/signup'
-      const response = await axios.post(`http://localhost:3000${endpoint}`, formData)
+  useEffect(() => {
+    setLoadState(true);
+  }, [type]);
 
-      if (response.data.success) {
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('user', JSON.stringify({
-          fullName: response.data.fullName,
-          email: response.data.email
-        }))
-        navigate('/chat')
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong. Please try again.')
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Dummy authentication logic
+    const userData = isLogin ? { email } : { fullName, email };
+    localStorage.setItem('token', 'dummy-token');
+    localStorage.setItem('user', JSON.stringify(userData));
+    navigate('/chat');
+  };
 
   return (
-    <div className="auth-page">
-      <div className="auth-container">
-        <div className="auth-left">
-          <Link to="/" className="back-link">
-            <ArrowLeft size={20} /> Back to explore
-          </Link>
+    <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row items-center justify-center p-4 lg:p-12 relative overflow-x-hidden overflow-y-auto">
+      {/* Background Decorations */}
+      <div className="absolute top-10 left-10 text-cyan-500/20 animate-bounce delay-700">
+        <Sparkles size={48} />
+      </div>
+      <div className="absolute bottom-20 left-1/4 text-blue-500/20 animate-pulse delay-1000">
+        <Stars size={32} />
+      </div>
+      <div className="absolute top-1/2 right-10 text-cyan-400/20 animate-bounce delay-500">
+        <Zap size={40} />
+      </div>
+      <div className="absolute top-20 right-1/4 text-blue-400/10 animate-spin-slow" style={{ animationDuration: '10s' }}>
+        <Activity size={64} />
+      </div>
 
-          <h1 className="auth-title">
-            {authType === 'login' ? 'Great to see you again' : 'Join the revolution'}
-          </h1>
-          <p className="auth-subtitle">
-            {authType === 'login'
-              ? 'Empower your daily tasks with intelligent conversations.'
-              : 'Experience the next generation of AI-driven productivity.'}
-          </p>
+      {/* Left Side - Text & Visuals */}
+      <div className={`w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-20 relative z-10 mb-1 lg:mb-0 text-center lg:text-left transition-all duration-700 ${loadState ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <Link to="/" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-500 hover:text-cyan-600 hover:border-cyan-200 transition-all mb-12 self-center lg:self-start shadow-sm hover:shadow-md group">
+          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+        </Link>
 
-          {error && <div className="auth-error-message">{error}</div>}
+        <h1 className="text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+          {isLogin ? 'Welcome' : 'Create Your'} <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">
+            {isLogin ? 'Back Again!' : 'AI Account'}
+          </span>
+        </h1>
 
-          <form onSubmit={handleSubmit} className="auth-form">
-            {authType === 'signup' && (
-              <div className="form-group">
-                <label htmlFor="fullName">Full Name</label>
-                <div className="input-wrapper">
-                  <User className="input-icon" size={20} />
+        <p className="text-lg text-slate-600 mb-8 max-w-md mx-auto lg:mx-0 leading-relaxed">
+          {isLogin
+            ? "Ready to pick up where you left off? Your AI assistant is waiting."
+            : "Join thousands of users using AI Bot to simplify tasks and boost productivity with intelligent automation."}
+        </p>
+
+        <div className="flex items-center gap-4 justify-center lg:justify-start text-sm font-medium text-slate-500">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-cyan-500"></div> No credit card required
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-blue-500"></div> Free tier available
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side - Form Card */}
+      <div className={`w-full lg:w-1/2 max-w-md w-full relative z-10 transition-all duration-1000 delay-200 ${loadState ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+        <div className="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 sm:p-10 mx-auto">
+          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">
+            {isLogin ? 'Log In to Your Account' : 'Create Account'}
+          </h2>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {!isLogin && (
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-slate-700 ml-1">Full Name</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <User className="h-5 w-5 text-slate-400" />
+                  </div>
                   <input
-                    id="fullName"
                     type="text"
-                    name="fullName"
-                    placeholder="e.g. Isha Singh"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    required={authType === 'signup'}
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="block w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all"
+                    placeholder="John Doe"
+                    required
                   />
                 </div>
               </div>
             )}
 
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <div className="input-wrapper">
-                <Mail className="input-icon" size={20} />
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-slate-700 ml-1">Email</label>
+              <div className="relative">
                 <input
-                  id="email"
                   type="email"
-                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="block w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all"
                   placeholder="name@example.com"
-                  value={formData.email}
-                  onChange={handleInputChange}
                   required
                 />
               </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <div className="input-wrapper">
-                <Lock className="input-icon" size={20} />
+            <div className="space-y-1.5">
+              <label className="text-sm font-semibold text-slate-700 ml-1">Password</label>
+              <div className="relative">
                 <input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="block w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all"
                   placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleInputChange}
                   required
                 />
-                <button
-                  type="button"
-                  className="toggle-password"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
+              </div>
+            </div>
+
+            {!isLogin && (
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-slate-700 ml-1">Confirm Password</label>
+                <div className="relative">
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="block w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all"
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+              </div>
+            )}
+
+            <button type="submit" className="w-full py-3.5 px-6 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/20 transform hover:-translate-y-0.5 transition-all duration-200 mt-2">
+              {isLogin ? 'Sign In' : 'Sign Up'}
+            </button>
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-200"></div>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase tracking-wider">
+                <span className="px-4 bg-white text-slate-400 font-medium">Or continue with</span>
               </div>
             </div>
 
             <button
-              type="submit"
-              className="btn-submit"
-              disabled={isLoading}
+              type="button"
+              onClick={() => window.location.href = 'http://localhost:3000/auth/google'}
+              className="w-full py-3.5 px-6 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold rounded-xl flex items-center justify-center gap-3 transition-all hover:border-slate-300 shadow-sm hover:shadow-md"
             >
-              {isLoading ? 'Processing...' : (authType === 'login' ? 'Sign In' : 'Create Account')}
+              <Chrome className="w-5 h-5 text-slate-900" />
+              Continue with Google
             </button>
           </form>
 
-          <div className="auth-footer">
-            {authType === 'login' ? (
-              <>
-                New to AI-ChatBot?{' '}
-                <button className="auth-switch-btn" onClick={() => setAuthType('signup')}>
-                  Start for free
-                </button>
-              </>
-            ) : (
-              <>
-                Already have an account?{' '}
-                <button className="auth-switch-btn" onClick={() => setAuthType('login')}>
-                  Sign in here
-                </button>
-              </>
-            )}
-          </div>
+          <p className="mt-8 text-center text-sm text-slate-500">
+            {isLogin ? "Don't have an account? " : "Already have an account? "}
+            <Link to={isLogin ? "/signup" : "/login"} className="text-cyan-600 hover:text-cyan-700 font-bold hover:underline transition-all">
+              {isLogin ? 'Sign Up' : 'Log In'}
+            </Link>
+          </p>
         </div>
 
-        <div className="auth-right">
-          <div className="echo-container">
-            <h2 className="echo-title">
-              Meet the <br /> <span>Echo Mind!</span>
-            </h2>
-
-            <div className="echo-visual-section">
-              <div className="thought-bubble">
-                Need our help now?
-              </div>
-              <div className="thought-dots">
-                <div className="dot-1"></div>
-                <div className="dot-2"></div>
-                <div className="dot-3"></div>
-              </div>
-              <div className="robot-glow"></div>
-              <img
-                src="/assets/images/robot.png"
-                alt="Echo Mind Robot"
-                className="echo-robot"
-              />
-            </div>
-
-            <div className="echo-bottom-bar">
-              <div className="echo-start-btn">
-                <div className="chevron-circle">
-                  <ChevronRight size={24} />
-                </div>
-                <span className="btn-text">Get Started</span>
-                <div className="arrows">
-                  <ChevronRight size={14} />
-                  <ChevronRight size={14} />
-                  <ChevronRight size={14} />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="mt-8 flex justify-center gap-6 text-xs text-slate-400">
+          <a href="#" className="hover:text-slate-600 transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-slate-600 transition-colors">Terms of Service</a>
         </div>
       </div>
     </div>
-  )
+  );
 }
