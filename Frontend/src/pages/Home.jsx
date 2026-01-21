@@ -174,11 +174,11 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="pt-8 border-t border-zd-border flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="text-zd-muted text-sm">© 2024 Kyra Bot Technologies Inc.</div>
+                        <div className="text-zd-muted text-sm">© 2026 Kyra Bot Technologies Inc.</div>
                         <div className="flex gap-4">
-                            <a href="#" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Twitter size={20} /></a>
-                            <a href="#" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Github size={20} /></a>
-                            <a href="#" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Linkedin size={20} /></a>
+                            <a href="https://x.com/isha_singh06" target="_blank" rel="noopener noreferrer" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Twitter size={20} /></a>
+                            <a href="https://github.com/IshaCodes04" target="_blank" rel="noopener noreferrer" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Github size={20} /></a>
+                            <a href="https://www.linkedin.com/in/isha-singh-b00715300/" target="_blank" rel="noopener noreferrer" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Linkedin size={20} /></a>
                         </div>
                     </div>
                 </div>
