@@ -35,8 +35,12 @@ function Chat() {
     const [isListening, setIsListening] = useState(false);
     const [recognition, setRecognition] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isHeaderMenuOpen, setIsHeaderMenuOpen] = useState(false);
+    const [toast, setToast] = useState(null);
     const messagesEndRef = useRef(null);
     const socketRef = useRef(null);
+    const headerMenuRef = useRef(null);
+    const headerMenuButtonRef = useRef(null);
     const navigate = useNavigate();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || { fullName: 'User', email: 'user@example.com' });
 
@@ -142,6 +146,37 @@ function Chat() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // Close header menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                headerMenuRef.current &&
+                !headerMenuRef.current.contains(event.target) &&
+                headerMenuButtonRef.current &&
+                !headerMenuButtonRef.current.contains(event.target)
+            ) {
+                setIsHeaderMenuOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    // Close header menu on Escape
+    useEffect(() => {
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') setIsHeaderMenuOpen(false);
+        };
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, []);
+
+    useEffect(() => {
+        if (!toast) return;
+        const t = setTimeout(() => setToast(null), 1400);
+        return () => clearTimeout(t);
+    }, [toast]);
 
     useEffect(() => {
         scrollToBottom();
@@ -423,14 +458,82 @@ function Chat() {
                         </div>
                     </div>
                     {/* Header Actions */}
-                    <div className="flex items-center gap-2">
-                        <button className="p-2 text-zd-muted/70 hover:text-zd-ink hover:bg-zd-surface2 rounded-lg transition-colors" title="Settings">
+                    <div className="relative flex items-center gap-2 z-[2001]">
+                        <span className="hidden sm:inline text-xs font-bold text-zd-muted uppercase tracking-wider">
+                            Quick actions
+                        </span>
+                        <button
+                            ref={headerMenuButtonRef}
+                            onClick={() => setIsHeaderMenuOpen((prev) => !prev)}
+                            className={`p-2 text-zd-muted/70 hover:text-zd-ink hover:bg-zd-surface2 rounded-lg transition-colors ${isHeaderMenuOpen ? 'bg-zd-surface2 text-zd-ink' : ''}`}
+                            aria-haspopup="menu"
+                            aria-expanded={isHeaderMenuOpen}
+                            title="More"
+                        >
                             <div className="w-5 h-5 flex items-center justify-center">
                                 <span className="text-xl leading-none pb-2">...</span>
                             </div>
                         </button>
+
+                        {isHeaderMenuOpen && (
+                            <div
+                                ref={headerMenuRef}
+                                className="fixed right-4 top-[4.25rem] sm:right-6 sm:top-[4.25rem] w-60 bg-zd-surface border border-zd-border/70 rounded-2xl shadow-2xl backdrop-blur-md z-[9999] overflow-hidden"
+                                role="menu"
+                            >
+                                <button
+                                    onClick={() => {
+                                        handleNewChat();
+                                        setIsHeaderMenuOpen(false);
+                                    }}
+                                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-zd-ink hover:bg-zd-surface2 transition-colors"
+                                    role="menuitem"
+                                >
+                                    <Plus size={16} className="text-zd-brand" />
+                                    New conversation
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setMessages([]);
+                                        if (currentConversationId) {
+                                            setConversations(prev => prev.map(conv =>
+                                                conv.id === currentConversationId
+                                                    ? { ...conv, messages: [], lastMessage: '', timestamp: 'Just now' }
+                                                    : conv
+                                            ));
+                                        }
+                                        setIsHeaderMenuOpen(false);
+                                        setToast('Cleared chat');
+                                    }}
+                                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-zd-ink hover:bg-zd-surface2 transition-colors"
+                                    role="menuitem"
+                                >
+                                    <Trash2 size={16} className="text-zd-muted/70" />
+                                    Clear current chat
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        switchTheme(theme === 'dark' ? 'light' : 'dark');
+                                        setIsHeaderMenuOpen(false);
+                                    }}
+                                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-zd-ink hover:bg-zd-surface2 transition-colors"
+                                    role="menuitem"
+                                >
+                                    {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+                                    {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
+
+                {toast && (
+                    <div className="fixed top-20 right-4 z-[80]">
+                        <div className="px-3 py-2 rounded-xl bg-zd-ink text-zd-canvas text-sm font-semibold shadow-xl">
+                            {toast}
+                        </div>
+                    </div>
+                )}
 
                 {/* Messages Area */}
                 <div className="flex-1 min-h-0 overflow-y-auto px-4 lg:px-8 py-5 custom-scrollbar scroll-smooth">
