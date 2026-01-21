@@ -438,7 +438,7 @@ function Chat() {
             {/* Main Chat Area */}
             <div className="flex-1 min-w-0 flex flex-col h-full bg-gradient-to-br from-zd-canvas to-zd-surface2">
                 {/* Chat Header */}
-                <div className="h-16 bg-zd-surface/70 backdrop-blur-xl border-b border-zd-border/70 flex items-center justify-between px-4 lg:px-8 shrink-0">
+                <div className="h-16 bg-zd-surface/70 backdrop-blur-xl border-b border-zd-border/70 flex items-center justify-between px-4 lg:px-8 shrink-0 relative z-20">
                     <div className="flex items-center gap-3">
                         <button
                             className="lg:hidden p-2 -ml-2 text-zd-muted hover:bg-zd-surface2 rounded-lg"
@@ -478,50 +478,62 @@ function Chat() {
                         {isHeaderMenuOpen && (
                             <div
                                 ref={headerMenuRef}
-                                className="fixed right-4 top-[4.25rem] sm:right-6 sm:top-[4.25rem] w-60 bg-zd-surface border border-zd-border/70 rounded-2xl shadow-2xl backdrop-blur-md z-[9999] overflow-hidden"
+                                className="absolute right-0 top-full mt-2 w-56 bg-zd-surface/95 backdrop-blur-xl border border-zd-border/80 rounded-2xl shadow-xl shadow-zd-brand/5 z-[100] overflow-hidden animate-fade-in origin-top-right transform transition-all"
                                 role="menu"
                             >
-                                <button
-                                    onClick={() => {
-                                        handleNewChat();
-                                        setIsHeaderMenuOpen(false);
-                                    }}
-                                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-zd-ink hover:bg-zd-surface2 transition-colors"
-                                    role="menuitem"
-                                >
-                                    <Plus size={16} className="text-zd-brand" />
-                                    New conversation
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        setMessages([]);
-                                        if (currentConversationId) {
-                                            setConversations(prev => prev.map(conv =>
-                                                conv.id === currentConversationId
-                                                    ? { ...conv, messages: [], lastMessage: '', timestamp: 'Just now' }
-                                                    : conv
-                                            ));
-                                        }
-                                        setIsHeaderMenuOpen(false);
-                                        setToast('Cleared chat');
-                                    }}
-                                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-zd-ink hover:bg-zd-surface2 transition-colors"
-                                    role="menuitem"
-                                >
-                                    <Trash2 size={16} className="text-zd-muted/70" />
-                                    Clear current chat
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        switchTheme(theme === 'dark' ? 'light' : 'dark');
-                                        setIsHeaderMenuOpen(false);
-                                    }}
-                                    className="w-full flex items-center gap-2 px-4 py-3 text-sm text-zd-ink hover:bg-zd-surface2 transition-colors"
-                                    role="menuitem"
-                                >
-                                    {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-                                    {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-                                </button>
+                                <div className="p-1.5 flex flex-col gap-0.5">
+                                    <button
+                                        onClick={() => {
+                                            handleNewChat();
+                                            setIsHeaderMenuOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-zd-ink hover:bg-zd-surface2 rounded-xl transition-all duration-200 group"
+                                        role="menuitem"
+                                    >
+                                        <div className="p-1.5 bg-zd-brandSoft rounded-lg text-zd-brand group-hover:bg-zd-brand group-hover:text-white transition-colors">
+                                            <Plus size={14} />
+                                        </div>
+                                        New conversation
+                                    </button>
+
+                                    <button
+                                        onClick={() => {
+                                            switchTheme(theme === 'dark' ? 'light' : 'dark');
+                                            setIsHeaderMenuOpen(false);
+                                        }}
+                                        className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-zd-ink hover:bg-zd-surface2 rounded-xl transition-all duration-200 group"
+                                        role="menuitem"
+                                    >
+                                        <div className="p-1.5 bg-zd-surface2 rounded-lg text-zd-muted group-hover:bg-zd-ink group-hover:text-white transition-colors">
+                                            {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+                                        </div>
+                                        {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                                    </button>
+
+                                    <div className="h-px bg-zd-border/50 my-1 mx-2"></div>
+
+                                    <button
+                                        onClick={() => {
+                                            setMessages([]);
+                                            if (currentConversationId) {
+                                                setConversations(prev => prev.map(conv =>
+                                                    conv.id === currentConversationId
+                                                        ? { ...conv, messages: [], lastMessage: '', timestamp: 'Just now' }
+                                                        : conv
+                                                ));
+                                            }
+                                            setIsHeaderMenuOpen(false);
+                                            setToast('Cleared chat');
+                                        }}
+                                        className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200 group"
+                                        role="menuitem"
+                                    >
+                                        <div className="p-1.5 bg-red-50 rounded-lg text-red-500 group-hover:bg-red-200/50 transition-colors">
+                                            <Trash2 size={14} />
+                                        </div>
+                                        Clear chat
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>
