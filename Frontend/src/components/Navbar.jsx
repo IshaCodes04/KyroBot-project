@@ -9,7 +9,12 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isChatPage = location.pathname === '/chat';
-  const token = localStorage.getItem('token');
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  useEffect(() => {
+    // Update token state whenever location changes
+    setToken(localStorage.getItem('token'));
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {

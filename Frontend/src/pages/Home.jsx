@@ -33,9 +33,15 @@ export default function Home() {
                                 Get clear answers, stronger writing, and better code in seconds. Built for teams, students, and builders who care about quality, privacy, and consistency.
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                                <Link to="/signup" className="px-8 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-[rgba(125,89,255,0.20)] hover:shadow-[rgba(125,89,255,0.28)] flex items-center gap-2 transform hover:-translate-y-1">
-                                    Start Chatting <ChevronRight className="w-5 h-5" />
-                                </Link>
+                                {token ? (
+                                    <Link to="/chat" className="px-8 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-[rgba(125,89,255,0.20)] hover:shadow-[rgba(125,89,255,0.28)] flex items-center gap-2 transform hover:-translate-y-1">
+                                        Open Chat <ChevronRight className="w-5 h-5" />
+                                    </Link>
+                                ) : (
+                                    <Link to="/signup" className="px-8 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-[rgba(125,89,255,0.20)] hover:shadow-[rgba(125,89,255,0.28)] flex items-center gap-2 transform hover:-translate-y-1">
+                                        Start Chatting <ChevronRight className="w-5 h-5" />
+                                    </Link>
+                                )}
                                 <Link to="/about" className="px-8 py-4 bg-zd-surface hover:bg-zd-surface2 text-zd-ink border border-zd-border rounded-xl font-bold text-lg transition-all shadow-sm">
                                     See how it works
                                 </Link>
@@ -131,9 +137,15 @@ export default function Home() {
                     <h2 className="text-4xl md:text-5xl font-bold text-zd-ink mb-6">Ready to build the future?</h2>
                     <p className="text-xl text-zd-muted mb-10">Start in minutes. Ask better questions, get better outputs, and move faster — without the fluff.</p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <Link to="/signup" className="px-10 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.18)]">
-                            Get Started Free <ArrowRight className="w-5 h-5" />
-                        </Link>
+                        {token ? (
+                            <Link to="/chat" className="px-10 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.18)]">
+                                Continue to Chat <ArrowRight className="w-5 h-5" />
+                            </Link>
+                        ) : (
+                            <Link to="/signup" className="px-10 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.18)]">
+                                Get Started Free <ArrowRight className="w-5 h-5" />
+                            </Link>
+                        )}
                         <button className="px-10 py-4 bg-transparent border border-zd-border hover:bg-zd-surface2 text-zd-ink rounded-full font-bold text-lg transition-colors">
                             Contact Sales
                         </button>
