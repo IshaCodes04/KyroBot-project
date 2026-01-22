@@ -478,7 +478,7 @@ function Chat() {
                         {isHeaderMenuOpen && (
                             <div
                                 ref={headerMenuRef}
-                                className="absolute right-0 top-full mt-2 w-56 bg-zd-surface/95 backdrop-blur-xl border border-zd-border/80 rounded-2xl shadow-xl shadow-zd-brand/5 z-[100] overflow-hidden animate-fade-in origin-top-right transform transition-all"
+                                className="absolute right-0 top-full mt-2 w-56 bg-zd-surface/95 backdrop-blur-xl border border-zd-border/80 rounded-2xl shadow-xl shadow-[rgba(125,89,255,0.1)] z-[100] overflow-hidden animate-fade-in origin-top-right transform transition-all"
                                 role="menu"
                             >
                                 <div className="p-1.5 flex flex-col gap-0.5">
@@ -630,8 +630,8 @@ function Chat() {
                 <div className="px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:p-6 border-t border-zd-border/60 bg-zd-surface/70 backdrop-blur-xl shrink-0">
                     <div className="max-w-4xl mx-auto">
                         <div className={`relative flex items-center gap-2 bg-zd-surface border transition-all duration-300 rounded-[2rem] p-2 shadow-2xl shadow-[rgba(31,27,26,0.06)] ${inputMessage ? 'border-zd-brand ring-4 ring-zd-brand/10' : 'border-zd-border'}`}>
-                            <button className="p-3 text-zd-muted/70 hover:text-zd-brand hover:bg-zd-brandSoft rounded-full transition-colors shrink-0">
-                                <Plus size={24} />
+                            <button className="p-3 text-zd-muted/70 hover:text-zd-brand hover:bg-zd-brandSoft rounded-full transition-colors shrink-0" title="Attach files">
+                                <Paperclip size={22} />
                             </button>
 
                             <form onSubmit={handleSendMessage} className="flex-1 flex items-center">
@@ -644,7 +644,7 @@ function Chat() {
                                             handleSendMessage(e);
                                         }
                                     }}
-                                    placeholder="Message..."
+                                    placeholder="Message Kyra Bot..."
                                     className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-zd-ink placeholder-zd-muted/70 resize-none py-3 px-2 text-base sm:text-lg leading-relaxed max-h-32 custom-scrollbar"
                                     rows={1}
                                     style={{ minHeight: '24px', boxShadow: 'none' }}
@@ -652,25 +652,29 @@ function Chat() {
                             </form>
 
                             <div className="flex items-center gap-1 pr-1 shrink-0">
-                                {inputMessage && (
+                                {inputMessage.trim() ? (
                                     <button
-                                        className={`p-2.5 rounded-full transition-all duration-300 ${isListening ? 'bg-red-50 text-red-600 animate-pulse' : 'text-zd-muted/70 hover:text-zd-ink hover:bg-zd-surface2'}`}
+                                        onClick={handleSendMessage}
+                                        disabled={!isConnected}
+                                        className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center ${isConnected
+                                            ? 'bg-zd-brand text-white shadow-lg shadow-[rgba(125,89,255,0.30)] hover:bg-zd-brand2 hover:scale-105 active:scale-95'
+                                            : 'bg-zd-surface2 text-zd-muted/50 cursor-not-allowed'
+                                            }`}
+                                        title="Send message"
+                                    >
+                                        <Send size={20} className="ml-0.5" />
+                                    </button>
+                                ) : (
+                                    <button
                                         onClick={toggleVoiceInput}
-                                        title="Voice Input"
+                                        className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center ${isListening
+                                            ? 'bg-red-500 text-white animate-pulse shadow-lg shadow-red-500/30'
+                                            : 'text-zd-muted/70 hover:text-zd-brand hover:bg-zd-brandSoft'}`}
+                                        title={isListening ? "Stop listening" : "Voice input"}
                                     >
                                         <Mic size={22} />
                                     </button>
                                 )}
-                                <button
-                                    onClick={handleSendMessage}
-                                    disabled={!inputMessage.trim() || !isConnected}
-                                    className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center ${inputMessage.trim() && isConnected
-                                        ? 'bg-zd-brand text-white shadow-lg shadow-[rgba(125,89,255,0.30)] hover:bg-zd-brand2 hover:scale-105 active:scale-95'
-                                        : 'bg-zd-surface2 text-zd-muted/50 cursor-not-allowed'
-                                        }`}
-                                >
-                                    {inputMessage.trim() ? <Send size={20} className="ml-0.5" /> : <Mic size={22} />}
-                                </button>
                             </div>
                         </div>
                         <div className="text-center mt-3 text-xs font-medium text-zd-muted/70 flex items-center justify-center gap-2">
