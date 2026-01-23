@@ -1,0 +1,90 @@
+﻿
+> Frontend@0.0.0 lint
+> eslint .
+
+
+C:\Users\Isha Singh\OneDrive\Desktop\ai-chatbot-project\Frontend\src\components\Navbar.jsx
+  16:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  14 |   useEffect(() => {
+  15 |     // Update token state whenever location changes
+> 16 |     setToken(localStorage.getItem('token'));
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  17 |   }, [location]);
+  18 |
+  19 |   useEffect(() => {  react-hooks/set-state-in-effect
+
+C:\Users\Isha Singh\OneDrive\Desktop\ai-chatbot-project\Frontend\src\components\NeuralNetwork.jsx
+  19:9  warning  Compilation Skipped: Inline `class` declarations are not supported
+
+Move class declarations outside of components/hooks.
+
+  17 |         const connectionDistance = 120;
+  18 |
+> 19 |         class Particle {
+     |         ^^^^^^^^^^^^^^^^
+> 20 |             constructor() {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 21 |                 this.x = Math.random() * width;
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |             }
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 43 |         }
+     | ^^^^^^^^^^ Inline `class` declarations are not supported
+  44 |
+  45 |         // Initialize particles
+  46 |         for (let i = 0; i < particleCount; i++) {
+
+  react-hooks/unsupported-syntax
+
+C:\Users\Isha Singh\OneDrive\Desktop\ai-chatbot-project\Frontend\src\pages\AuthPage.jsx
+  17:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  15 |
+  16 |   useEffect(() => {
+> 17 |     setLoadState(false);
+     |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  18 |     const t = setTimeout(() => setLoadState(true), 10);
+  19 |     return () => clearTimeout(t);
+  20 |   }, [type]);  react-hooks/set-state-in-effect
+
+C:\Users\Isha Singh\OneDrive\Desktop\ai-chatbot-project\Frontend\src\pages\Chat.jsx
+  181:9  error  Error: Cannot access variable before it is declared
+
+`scrollToBottom` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  179 |
+  180 |     useEffect(() => {
+> 181 |         scrollToBottom();
+      |         ^^^^^^^^^^^^^^ `scrollToBottom` accessed before it is declared
+  182 |     }, [messages]);
+  183 |
+  184 |     const scrollToBottom = () => {
+
+  182 |     }, [messages]);
+  183 |
+> 184 |     const scrollToBottom = () => {
+      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 185 |         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 186 |     };
+      | ^^^^^^^ `scrollToBottom` is declared here
+  187 |
+  188 |     const handleSendMessage = (e) => {
+  189 |         e.preventDefault();  react-hooks/immutability
+
+Γ£û 4 problems (3 errors, 1 warning)
+

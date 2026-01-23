@@ -9,12 +9,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isChatPage = location.pathname === '/chat';
-  const [token, setToken] = useState(localStorage.getItem('token'));
-
-  useEffect(() => {
-    // Update token state whenever location changes
-    setToken(localStorage.getItem('token'));
-  }, [location]);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,12 +50,20 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="flex items-center gap-4">
               {token ? (
-                <Link
-                  to="/chat"
-                  className="text-zd-muted hover:text-zd-ink px-2.5 py-2 text-sm font-medium transition-colors"
-                >
-                  Open Chat
-                </Link>
+                <div className="flex items-center gap-3">
+                  <Link
+                    to="/chat"
+                    className="text-zd-muted hover:text-zd-ink px-2.5 py-2 text-sm font-medium transition-colors"
+                  >
+                    Open Chat
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="text-red-500 hover:text-red-600 px-2.5 py-2 text-sm font-medium transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
               ) : (
                 <>
                   <Link to="/login" className="text-zd-muted hover:text-zd-ink px-2.5 py-2 text-sm font-medium transition-colors">
@@ -102,13 +105,21 @@ export default function Navbar() {
               </>
             )}
             {token && (
-              <Link
-                to="/chat"
-                onClick={() => setIsOpen(false)}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2"
-              >
-                Open Chat
-              </Link>
+              <>
+                <Link
+                  to="/chat"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-zd-muted hover:text-zd-ink hover:bg-zd-surface2"
+                >
+                  Open Chat
+                </Link>
+                <button
+                  onClick={() => { handleLogout(); setIsOpen(false); }}
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-500 hover:text-red-600 hover:bg-zd-surface2"
+                >
+                  Logout
+                </button>
+              </>
             )}
           </div>
         </div>

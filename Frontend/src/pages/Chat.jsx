@@ -10,7 +10,6 @@ import {
     Search,
     Brain,
     Image as ImageIcon,
-    BarChart3,
     Paperclip,
     Trash2,
     Volume2,
@@ -42,7 +41,7 @@ function Chat() {
     const headerMenuRef = useRef(null);
     const headerMenuButtonRef = useRef(null);
     const navigate = useNavigate();
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || { fullName: 'User', email: 'user@example.com' });
+    const [user] = useState(JSON.parse(localStorage.getItem('user')) || { fullName: 'User', email: 'user@example.com' });
 
     const filteredConversations = conversations.filter(conv =>
         conv.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -94,7 +93,7 @@ function Chat() {
 
         // Sync initial connection state
         if (socketRef.current.connected) {
-            setIsConnected(true);
+            setTimeout(() => setIsConnected(true), 0);
         }
 
         // Initialize Speech Recognition
@@ -115,7 +114,7 @@ function Chat() {
 
             recognitionInstance.onend = () => setIsListening(false);
             recognitionInstance.onerror = () => setIsListening(false);
-            setRecognition(recognitionInstance);
+            setTimeout(() => setRecognition(recognitionInstance), 0);
         }
 
         return () => {
@@ -129,11 +128,13 @@ function Chat() {
 
     useEffect(() => {
         if (currentConversationId && messages.length > 0) {
-            setConversations(prev => prev.map(conv =>
-                conv.id === currentConversationId
-                    ? { ...conv, messages: messages }
-                    : conv
-            ));
+            setTimeout(() => {
+                setConversations(prev => prev.map(conv =>
+                    conv.id === currentConversationId
+                        ? { ...conv, messages: messages }
+                        : conv
+                ));
+            }, 0);
         }
     }, [messages, currentConversationId]);
 
@@ -178,13 +179,13 @@ function Chat() {
         return () => clearTimeout(t);
     }, [toast]);
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
-
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const handleSendMessage = (e) => {
         e.preventDefault();

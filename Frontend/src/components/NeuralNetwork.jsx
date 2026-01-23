@@ -1,5 +1,30 @@
 import { useEffect, useRef } from 'react';
 
+class Particle {
+    constructor(width, height) {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 2 + 1;
+    }
+
+    update(width, height) {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+
+    draw(ctx) {
+        ctx.fillStyle = '#16a34a'; // green-600
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
 const NeuralNetwork = () => {
     const canvasRef = useRef(null);
 
@@ -16,35 +41,9 @@ const NeuralNetwork = () => {
         const particleCount = 60;
         const connectionDistance = 120;
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2 + 1;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-
-            draw() {
-                // Green nodes (premium, readable on warm canvas)
-                ctx.fillStyle = '#16a34a'; // green-600
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
         // Initialize particles
         for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
+            particles.push(new Particle(width, height));
         }
 
         const animate = () => {
@@ -52,8 +51,8 @@ const NeuralNetwork = () => {
 
             // Update and draw particles
             particles.forEach(p => {
-                p.update();
-                p.draw();
+                p.update(width, height);
+                p.draw(ctx);
             });
 
             // Draw connections

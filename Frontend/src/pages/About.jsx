@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Globe, Users, Code2, Cpu, ShieldCheck, Zap } from 'lucide-react';
 import NeuralNetwork from '../components/NeuralNetwork';

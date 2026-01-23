@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { Mail, Lock, ArrowLeft, Chrome, Sparkles, Activity, Zap, Stars, User } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { ArrowLeft, Chrome, Sparkles, Activity, Zap, Stars, User } from 'lucide-react';
 
 export default function AuthPage({ type }) {
   const isLogin = type === 'login';
   const navigate = useNavigate();
-  const location = useLocation();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +14,11 @@ export default function AuthPage({ type }) {
   const [loadState, setLoadState] = useState(false);
 
   useEffect(() => {
-    setLoadState(true);
+    const t = setTimeout(() => setLoadState(true), 10);
+    return () => {
+      clearTimeout(t);
+      setLoadState(false);
+    };
   }, [type]);
 
   const handleSubmit = (e) => {
