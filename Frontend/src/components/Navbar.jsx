@@ -38,9 +38,6 @@ export default function Navbar() {
                 <span className="text-xl font-bold text-zd-ink tracking-tight">
                   Kyrobot
                 </span>
-                <span className="text-[10px] font-semibold text-zd-brand uppercase tracking-[0.15em] mt-0.5">
-                  AI, Evolved.
-                </span>
               </div>
             </Link>
           </div>
