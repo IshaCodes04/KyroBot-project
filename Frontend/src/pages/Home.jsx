@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, Zap, Shield, Cpu, GraduationCap, Code, PenTool, ArrowRight, Github, Twitter, Linkedin } from 'lucide-react';
 import NeuralNetwork from '../components/NeuralNetwork';
+import KyraLogo from '../components/KyraLogo';
 
 export default function Home() {
     const token = localStorage.getItem('token');
@@ -27,7 +28,7 @@ export default function Home() {
                                 Live System Status: Optimal
                             </div>
                             <h1 className="text-5xl lg:text-7xl font-bold text-zd-ink mb-6 leading-tight tracking-tight">
-                                AI that feels <span className="text-transparent bg-clip-text bg-gradient-to-r from-zd-brand to-zd-brand2">human</span> — and works at business speed.
+                                Kyrobot: <span className="text-transparent bg-clip-text bg-gradient-to-r from-zd-brand to-zd-brand2">AI, Evolved.</span>
                             </h1>
                             <p className="text-xl text-zd-muted mb-8 max-w-lg mx-auto lg:mx-0">
                                 Get clear answers, stronger writing, and better code in seconds. Built for teams, students, and builders who care about quality, privacy, and consistency.
@@ -159,11 +160,12 @@ export default function Home() {
                     <div className="grid md:grid-cols-4 gap-8 mb-8">
                         <div className="col-span-1 md:col-span-2">
                             <div className="flex items-center gap-2 mb-4">
-                                <div className="p-1.5 bg-zd-ink rounded-lg text-zd-canvas">
-                                    <Cpu size={24} />
-                                </div>
-                                <span className="text-2xl font-bold text-zd-ink">Kyra Bot</span>
+                                <KyraLogo size="sm" />
+                                <span className="text-2xl font-bold text-zd-ink tracking-tight">Kyrobot</span>
                             </div>
+                            <p className="text-[10px] font-bold text-zd-brand uppercase tracking-widest mb-4">
+                                AI, Evolved.
+                            </p>
                             <p className="text-zd-muted max-w-xs">The world's most advanced AI platform for the next generation of digital creators and builders.</p>
                         </div>
                         <div>
@@ -186,7 +188,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="pt-8 border-t border-zd-border flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="text-zd-muted text-sm">© 2026 Kyra Bot Technologies Inc.</div>
+                        <div className="text-zd-muted text-sm">© 2026 Kyrobot Technologies Inc.</div>
                         <div className="flex gap-4">
                             <a href="https://x.com/isha_singh06" target="_blank" rel="noopener noreferrer" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Twitter size={20} /></a>
                             <a href="https://github.com/IshaCodes04" target="_blank" rel="noopener noreferrer" className="text-zd-muted/70 hover:text-zd-ink transition-colors"><Github size={20} /></a>

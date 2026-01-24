@@ -34,9 +34,14 @@ export default function Navbar() {
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center gap-2 group" onClick={() => setIsOpen(false)}>
               <KyraLogo size="md" />
-              <span className="text-xl font-bold text-zd-ink">
-                Kyra Bot
-              </span>
+              <div className="flex flex-col leading-none">
+                <span className="text-xl font-bold text-zd-ink tracking-tight">
+                  Kyrobot
+                </span>
+                <span className="text-[10px] font-semibold text-zd-brand uppercase tracking-[0.15em] mt-0.5">
+                  AI, Evolved.
+                </span>
+              </div>
             </Link>
           </div>
 
