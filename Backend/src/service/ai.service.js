@@ -1,19 +1,19 @@
 /**
- * AI Service using OpenRouter API
- * Documentation: https://openrouter.ai/docs
+ * AI Service using Groq API
+ * Documentation: https://console.groq.com/docs/api-reference
  */
 
 async function generateResponse(chatHistory) {
   try {
-    const apiKey = process.env.OPENROUTER_API_KEY?.trim();
+    const apiKey = process.env.GROQ_API_KEY?.trim();
 
     if (!apiKey) {
-      throw new Error("OPENROUTER_API_KEY is missing in .env file");
+      throw new Error("GROQ_API_KEY is missing in .env file");
     }
 
-    console.log("[AI Service] Sending request to OpenRouter...");
+    console.log("[AI Service] Sending request to Groq...");
 
-    // Convert Google SDK format to OpenAI format (required by OpenRouter)
+    // Convert Google SDK format to OpenAI format (required by Groq)
     // Input: { role: "user/model", parts: [{ text: "..." }] }
     // Output: { role: "user/assistant", content: "..." }
     const messages = chatHistory.map(msg => ({
@@ -21,16 +21,15 @@ async function generateResponse(chatHistory) {
       content: msg.parts[0].text
     }));
 
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    // Groq API Endpoint
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost:3000",
-        "X-Title": "AI Chatbot Project",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "google/gemini-2.0-flash-exp:free",
+        model: "llama-3.3-70b-versatile", // Updated to supported model
         messages: messages,
       })
     });
@@ -38,13 +37,8 @@ async function generateResponse(chatHistory) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("[AI Service] OpenRouter Error:", data);
-
-      if (response.status === 429) {
-        return "The AI is currently busy. Please try again in a few moments.";
-      }
-
-      throw new Error(data.error?.message || `OpenRouter API error: ${response.status}`);
+      console.error("[AI Service] Groq Error:", data);
+      throw new Error(data.error?.message || `Groq API error: ${response.status}`);
     }
 
     console.log("[AI Service] Response received successfully");
