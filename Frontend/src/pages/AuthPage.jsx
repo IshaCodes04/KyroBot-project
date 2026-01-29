@@ -161,7 +161,7 @@ export default function AuthPage({ type }) {
 
             <button
               type="button"
-              onClick={() => window.location.href = 'http://localhost:3000/auth/google'}
+              onClick={() => window.location.href = import.meta.env.PROD ? '/auth/google' : 'http://localhost:3000/auth/google'}
               className="w-full py-3.5 px-6 bg-zd-surface hover:bg-zd-surface2 border border-zd-border text-zd-ink font-bold rounded-xl flex items-center justify-center gap-3 transition-all shadow-sm hover:shadow-md"
             >
               <Chrome className="w-5 h-5 text-zd-ink" />

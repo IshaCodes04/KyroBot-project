@@ -56,7 +56,8 @@ function Chat() {
         } // redirect to login page
 
         if (!socketRef.current) {
-            socketRef.current = io('http://localhost:3000', {
+            const socketUrl = import.meta.env.PROD ? '/' : 'http://localhost:3000';
+            socketRef.current = io(socketUrl, {
                 transports: ['websocket', 'polling'],
                 reconnection: true,
                 reconnectionAttempts: 10,
