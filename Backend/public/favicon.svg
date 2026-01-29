@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="kyraMech" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7D59FF" />
+      <stop offset="100%" style="stop-color:#6B44F7" />
+    </linearGradient>
+  </defs>
+  <rect x="25" y="15" width="12" height="70" rx="6" fill="url(#kyraMech)" />
+  <path d="M37 50 L70 20 M37 50 L70 80" fill="none" stroke="url(#kyraMech)" stroke-width="14" stroke-linecap="round" />
+  <rect x="21" y="8" width="20" height="18" rx="5" fill="#1F1B1A" />
+  <circle cx="27" cy="17" r="2.5" fill="white" />
+  <circle cx="35" cy="17" r="2.5" fill="white" />
+</svg>
