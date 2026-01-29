@@ -100,7 +100,10 @@ exports.googleCallback = (req, res) => {
     };
 
     // Redirect to frontend with token and user data
-    // Use environment variable for frontend URL or fallback to localhost
-    const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5173';
+    // Redirect to frontend with token and user data
+    // In production (Render), we are on the same domain, so we can redirect to root
+    const isProduction = process.env.NODE_ENV === 'production';
+    const frontendURL = isProduction ? '/' : 'http://localhost:5173';
+
     res.redirect(`${frontendURL}?token=${token}&user=${encodeURIComponent(JSON.stringify(userData))}`);
 };
