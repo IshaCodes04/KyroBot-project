@@ -326,7 +326,7 @@ function Chat() {
             )}
 
             {/* Sidebar */}
-            <div className={`fixed lg:relative z-50 w-[18rem] sm:w-80 h-full bg-zd-surface border-r border-zd-border transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+            <div className={`fixed lg:relative z-50 w-[85vw] sm:w-80 h-full bg-zd-surface border-r border-zd-border transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
                 {/* Sidebar Header */}
                 <div className="h-16 flex items-center justify-between px-6 border-b border-zd-border bg-zd-surface/60 backdrop-blur-md">
                     <div className="flex items-center gap-3">
@@ -590,8 +590,8 @@ function Chat() {
                                         {msg.sender === 'user' ? 'I' : <Brain size={16} />}
                                     </div>
 
-                                    <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[88%] sm:max-w-[80%]`}>
-                                        <div className={`py-3 px-5 rounded-2xl shadow-sm text-[15px] leading-relaxed break-words whitespace-pre-wrap ${msg.sender === 'user'
+                                    <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[90%] sm:max-w-[85%] lg:max-w-[75%]`}>
+                                        <div className={`py-2.5 px-4 sm:py-3 sm:px-5 rounded-2xl shadow-sm text-sm sm:text-[15px] leading-relaxed break-words whitespace-pre-wrap ${msg.sender === 'user'
                                             ? 'bg-zd-brand text-white rounded-tr-none'
                                             : 'bg-zd-surface border border-zd-border text-zd-ink rounded-tl-none'
                                             }`}>
@@ -647,7 +647,7 @@ function Chat() {
                                         }
                                     }}
                                     placeholder="Message Kyra Bot..."
-                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-zd-ink placeholder-zd-muted/70 resize-none py-3 px-2 text-base sm:text-lg leading-relaxed max-h-32 custom-scrollbar"
+                                    className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-zd-ink placeholder-zd-muted/70 resize-none py-2 sm:py-3 px-1 sm:px-2 text-sm sm:text-base md:text-lg leading-relaxed max-h-32 custom-scrollbar"
                                     rows={1}
                                     style={{ minHeight: '24px', boxShadow: 'none' }}
                                 />

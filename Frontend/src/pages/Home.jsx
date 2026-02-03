@@ -27,10 +27,10 @@ export default function Home() {
                                 <span className="w-2 h-2 rounded-full bg-zd-brand"></span>
                                 Live System Status: Optimal
                             </div>
-                            <h1 className="text-5xl lg:text-7xl font-bold text-zd-ink mb-6 leading-tight tracking-tight">
+                            <h1 className="text-4xl xs:text-5xl md:text-6xl lg:text-7xl font-bold text-zd-ink mb-6 leading-tight tracking-tight">
                                 Kyrobot: <span className="text-transparent bg-clip-text bg-gradient-to-r from-zd-brand to-zd-brand2">AI, Evolved.</span>
                             </h1>
-                            <p className="text-xl text-zd-muted mb-8 max-w-lg mx-auto lg:mx-0">
+                            <p className="text-lg md:text-xl text-zd-muted mb-8 max-w-lg mx-auto lg:mx-0">
                                 Get clear answers, stronger writing, and better code in seconds. Built for teams, students, and builders who care about quality, privacy, and consistency.
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
@@ -58,16 +58,16 @@ export default function Home() {
             {/* Metrics */}
             <section className="py-12 border-y border-zd-border bg-zd-surface/50 backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
                         {[
                             { value: "100ms", label: "Avg Latency" },
-                            { value: "99.9%", label: "Uptime Guarantee" },
-                            { value: "50M+", label: "Requests Served" },
-                            { value: "Zero", label: "Chat History Stored" },
+                            { value: "99.9%", label: "Uptime" },
+                            { value: "50M+", label: "Requests" },
+                            { value: "Zero", label: "Logs Stored" },
                         ].map((stat, index) => (
                             <div key={index} className="text-center group">
-                                <div className="text-3xl md:text-5xl font-bold text-zd-brand mb-2 group-hover:scale-110 transition-transform duration-300">{stat.value}</div>
-                                <div className="text-sm font-semibold text-zd-muted uppercase tracking-wider">{stat.label}</div>
+                                <div className="text-2xl xs:text-3xl md:text-5xl font-bold text-zd-brand mb-1 group-hover:scale-110 transition-transform duration-300">{stat.value}</div>
+                                <div className="text-[10px] md:text-sm font-bold text-zd-muted uppercase tracking-wider">{stat.label}</div>
                             </div>
                         ))}
                     </div>
@@ -135,19 +135,19 @@ export default function Home() {
             <section className="py-20 md:py-24 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-zd-brandSoft to-zd-surface2 opacity-70"></div>
                 <div className="max-w-4xl mx-auto px-4 relative z-10 text-center bg-zd-surface p-12 rounded-3xl border border-zd-border shadow-xl">
-                    <h2 className="text-4xl md:text-5xl font-bold text-zd-ink mb-6">Ready to build the future?</h2>
-                    <p className="text-xl text-zd-muted mb-10">Start in minutes. Ask better questions, get better outputs, and move faster — without the fluff.</p>
+                    <h2 className="text-3xl md:text-5xl font-bold text-zd-ink mb-6">Ready to build the future?</h2>
+                    <p className="text-lg md:text-xl text-zd-muted mb-10">Start in minutes. Ask better questions, get better outputs, and move faster — without the fluff.</p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         {token ? (
-                            <Link to="/chat" className="px-10 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.18)]">
+                            <Link to="/chat" className="w-full sm:w-auto px-10 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.18)]">
                                 Continue to Chat <ArrowRight className="w-5 h-5" />
                             </Link>
                         ) : (
-                            <Link to="/signup" className="px-10 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.18)]">
+                            <Link to="/signup" className="w-full sm:w-auto px-10 py-4 bg-zd-brand hover:bg-zd-brand2 text-white rounded-full font-bold text-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[rgba(125,89,255,0.18)]">
                                 Get Started Free <ArrowRight className="w-5 h-5" />
                             </Link>
                         )}
-                        <button className="px-10 py-4 bg-transparent border border-zd-border hover:bg-zd-surface2 text-zd-ink rounded-full font-bold text-lg transition-colors">
+                        <button className="w-full sm:w-auto px-10 py-4 bg-transparent border border-zd-border hover:bg-zd-surface2 text-zd-ink rounded-full font-bold text-lg transition-colors">
                             Contact Sales
                         </button>
                     </div>

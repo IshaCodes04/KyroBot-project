@@ -31,7 +31,7 @@ export default function AuthPage({ type }) {
   };
 
   return (
-    <div className="min-h-screen bg-zd-canvas flex flex-col lg:flex-row items-center justify-center p-4 lg:p-12 relative overflow-x-hidden overflow-y-auto">
+    <div className="min-h-screen bg-zd-canvas flex flex-col lg:flex-row items-center justify-center p-4 sm:p-6 lg:p-12 relative overflow-x-hidden overflow-y-auto">
       {/* Background Decorations */}
       <div className="absolute top-10 left-10 text-zd-brand/15 animate-bounce delay-700">
         <Sparkles size={48} />
@@ -52,7 +52,7 @@ export default function AuthPage({ type }) {
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
         </Link>
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-zd-ink leading-tight mb-6">
+        <h1 className="text-3xl xs:text-4xl md:text-5xl lg:text-6xl font-extrabold text-zd-ink leading-tight mb-4 sm:mb-6">
           {isLogin ? 'Welcome back' : 'Create your account'} <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-zd-brand to-zd-brand2">
             {isLogin ? 'Let’s pick up where you left off.' : 'Start building with AI today.'}
@@ -65,7 +65,7 @@ export default function AuthPage({ type }) {
             : "Create an account to unlock faster workflows—better writing, clearer answers, and cleaner code in one place."}
         </p>
 
-        <div className="flex items-center gap-4 justify-center lg:justify-start text-sm font-medium text-zd-muted">
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start text-xs sm:text-sm font-medium text-zd-muted">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-zd-brand"></div> No credit card required
           </div>

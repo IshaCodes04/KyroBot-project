@@ -6,6 +6,9 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+                'xs': '480px',
+            },
             colors: {
                 // Zendesk-inspired warm neutral + purple brand palette
                 zd: {
@@ -22,6 +25,8 @@ export default {
             },
             animation: {
                 'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'fade-in': 'fadeIn 0.5s ease-out forwards',
+                'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
             }
         },
     },
