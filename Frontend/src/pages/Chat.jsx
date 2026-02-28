@@ -333,8 +333,8 @@ function Chat() {
                         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-zd-brand to-zd-brand2 flex items-center justify-center text-white shadow-lg shadow-[rgba(125,89,255,0.25)]">
                             <span className="font-extrabold text-xs">K</span>
                         </div>
-                        <div>
-                            <h1 className="font-bold text-lg tracking-tight text-zd-ink">Kyra Bot</h1>
+                        <div className="pr-2">
+                            <h1 className="font-bold text-lg tracking-tight text-zd-ink pr-1">KyroBot</h1>
                             <div className="flex items-center gap-1.5">
                                 <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-zd-border'}`}></span>
                                 <span className="text-xs font-medium text-zd-muted">{isConnected ? 'Online' : 'Offline'}</span>
@@ -451,8 +451,8 @@ function Chat() {
                         <div className="w-9 h-9 rounded-full bg-zd-brandSoft text-zd-brand flex items-center justify-center border border-zd-surface shadow-sm">
                             <span className="font-extrabold text-xs">K</span>
                         </div>
-                        <div>
-                            <h2 className="font-bold text-zd-ink text-sm">Kyra Bot</h2>
+                        <div className="pr-2">
+                            <h2 className="font-bold text-zd-ink text-sm pr-1">KyroBot</h2>
                             <div className="flex items-center gap-1.5">
                                 <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-zd-border'}`}></span>
                                 <span className="text-xs text-zd-muted font-medium">{isConnected ? 'Active' : 'Connecting...'}</span>
@@ -646,7 +646,7 @@ function Chat() {
                                             handleSendMessage(e);
                                         }
                                     }}
-                                    placeholder="Message Kyra Bot..."
+                                    placeholder="Message KyroBot..."
                                     className="w-full bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus:border-none text-zd-ink placeholder-zd-muted/70 resize-none py-2 sm:py-3 px-1 sm:px-2 text-sm sm:text-base md:text-lg leading-relaxed max-h-32 custom-scrollbar"
                                     rows={1}
                                     style={{ minHeight: '24px', boxShadow: 'none' }}
@@ -680,7 +680,7 @@ function Chat() {
                             </div>
                         </div>
                         <div className="text-center mt-3 text-xs font-medium text-zd-muted/70 flex items-center justify-center gap-2">
-                            <span>Powered by Kyra Bot</span>
+                            <span>Powered by KyroBot</span>
                         </div>
                     </div>
                 </div>

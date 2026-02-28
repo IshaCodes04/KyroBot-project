@@ -36,7 +36,7 @@ export default function Navbar() {
               <KyraLogo size="md" />
               <div className="flex flex-col leading-none">
                 <span className="text-xl font-bold text-zd-ink tracking-tight">
-                  Kyrobot
+                  KyroBot
                 </span>
               </div>
             </Link>
